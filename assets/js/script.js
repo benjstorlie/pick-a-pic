@@ -191,3 +191,12 @@ function storeData() {
 function deleteItem() {
     
 }
+
+// Store the search term in local storage
+localStorage.setItem('searchTerm', term);
+
+
+// Retrieve the search term from local storage
+let searchTerm = localStorage.getItem('searchTerm');
+console.log(searchTerm);
+
