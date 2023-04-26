@@ -133,6 +133,14 @@ function initResizeElement() {
     }
 }
 
+function saveState() {
+    const state = {
+      space: $('#space').html(),
+      dropdown: $('.dropdown-menu').html()
+    };
+    localStorage.setItem('state', JSON.stringify(state));
+  }
+
 
 
 function fetchPicture(term) {
@@ -165,10 +173,23 @@ function fetchPicture(term) {
         $('.dropdown-menu').append(`<li class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
         initDragElement();
         initResizeElement();
+        saveState();
         return picturesHTML;
     })
 
 }
+
+window.onload = function() {
+    const state = JSON.parse(localStorage.getItem('state'));
+    if (state) {
+      $('#space').html(state.space);
+      $('.dropdown-menu').html(state.dropdown);
+    }
+    initDragElement();
+    initResizeElement();
+  };
+
+
 function speak(term) {
     let utterance = new SpeechSynthesisUtterance(term);
     speechSynthesis.speak(utterance);
@@ -191,3 +212,10 @@ function storeData() {
 function deleteItem() {
     
 }
+
+
+
+
+
+
+
