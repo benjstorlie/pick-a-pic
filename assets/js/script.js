@@ -142,7 +142,24 @@ function saveState() {
   }
 
 
+  function deletecard(divtodelete) {
+    let speechBtn = document.getElementById('speechBtn');
+    console.log(divtodelete)
+    $(`#${divtodelete}`).remove();
+   let deletediv =  $(`#${divtodelete}`);
+   deletediv.remove()
+   console.log(deletediv)
+  // Check if speechBtn is defined before calling methods on it
+  if (speechBtn) {
+    speechBtn.style.display = 'none';
+    recognition.stop();
+  }
 
+localStorage.removeItem(divtodelete);
+
+}
+   
+  
 function fetchPicture(term) {
     console.log(term);
     let apiURL = "https://api.pexels.com/v1/search?query=" + term + "&size=small&per_page=10";
@@ -164,9 +181,10 @@ function fetchPicture(term) {
         for (let i = 0; i < response.photos.length; i++) {
             picturesHTML += `<img width="200px" src="${response.photos[i].src.medium}"/><br/>`;
             picturesHTML += `<i>Image by: ${response.photos[i].photographer}</i><br/>`;
-        }           
-        $('#space').append(`<div class="rounded popup">
-            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a></h5>
+        }  
+                 
+        $('#space').append(`<div id="${term}" class="rounded popup">
+            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a> <a class="delete" onclick="deletecard('${term}'); return false;">X</a></h5> 
             ${picturesHTML}
         </div>`);
         console.log($('.dropdown-menu').children);
@@ -205,13 +223,10 @@ function createNew() {
 
 // Need to be written
 
-function storeData() {
+  
+  
 
-}
-
-function deleteItem() {
-    
-}
+  
 
 
 
