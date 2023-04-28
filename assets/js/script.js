@@ -3,15 +3,46 @@ let pexelAPI = "SCqQHONMYkyRGofaJ7drvkznyjeDEyOhCuiy8qalGaJUISc0INFHfVqn";
 
 let picDiv = 0;
 
+// This array of colors will be used in the randomizeCardHeader function to generate a random color for each card header of the search results.
+let colorArray = [
+  '#FFFF00', 
+  '#FFD700', 
+  '#FFA500', 
+  '#FF4500', 
+  '#FF0000', 
+  '#C71585', 
+  '#800080',
+  '#483D8B',
+  '#0000FF',
+  '#008080',
+  '#008000',
+  '#9ACD32'  
+];
+
+function randomizeCardHeaderColor() {
+let cardHeaders = document.querySelectorAll(".popup-header");
+console.log(cardHeaders);
+for(var i = 0; i < cardHeaders.length; i++) {
+    
+    var backgroundColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+
+    cardHeaders[i].style.backgroundColor = backgroundColor
+
+    console.log(cardHeaders[i], backgroundColor);
+    }
+}
+
 window.onload = function() {
     const state = JSON.parse(localStorage.getItem('state'));
     if (state) {
-      $('#space').html(state.space);
-      $('.dropdown-menu').html(state.dropdown);
+        $('#space').html(state.space);
+        $('.dropdown-menu').html(state.dropdown);
     }
     initDragElement();
     initResizeElement();
+    randomizeCardHeaderColor();
 };
+
 function initDragElement() {
 var pos1 = 0,
     pos2 = 0,
