@@ -133,14 +133,9 @@ function initResizeElement() {
     }
 }
 
-function saveState() {
-    const state = {
-      space: $('#space').html(),
-      dropdown: $('.dropdown-menu').html()
-    };
-    localStorage.setItem('state', JSON.stringify(state));
-  }
-
+function selectPicture(term, photo) {
+    $(`#${term}-text`).html(`<img width="200px" src="${photo}"/><br/>`);
+}
 
   function deletecard(divtodelete) {
     let speechBtn = document.getElementById('speechBtn');
@@ -178,17 +173,22 @@ function fetchPicture(term) {
     .then(response => {
         console.log(response);
         let picturesHTML = '';
+        console.log(response.photos);
         for (let i = 0; i < response.photos.length; i++) {
             picturesHTML += `<img width="200px" src="${response.photos[i].src.medium}"/><br/>`;
             picturesHTML += `<i>Image by: ${response.photos[i].photographer}</i><br/>`;
-        }  
-                 
-        $('#space').append(`<div id="${term}" class="rounded popup">
-            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a> <a class="delete" onclick="deletecard('${term}'); return false;">X</a></h5> 
-            ${picturesHTML}
+            picturesHTML += `<a class="btn" onclick="selectPicture('${term}', '${response.photos[i].src.medium}'); return false;">Select Picture</a><br/>`;
+        }           
+        $('#space').append(`<div class="rounded popup">
+            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a></h5>
+            <div id="${term}-text">
+                ${picturesHTML}
+            </div>
         </div>`);
+
         console.log($('.dropdown-menu').children);
         $('.dropdown-menu').append(`<li class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
+        /* Good time to save to localStorage HTML for the elements being created. */
         initDragElement();
         initResizeElement();
         saveState();
@@ -197,21 +197,11 @@ function fetchPicture(term) {
 
 }
 
-window.onload = function() {
-    const state = JSON.parse(localStorage.getItem('state'));
-    if (state) {
-      $('#space').html(state.space);
-      $('.dropdown-menu').html(state.dropdown);
-    }
-    initDragElement();
-    initResizeElement();
-  };
-
-
 function speak(term) {
     let utterance = new SpeechSynthesisUtterance(term);
     speechSynthesis.speak(utterance);
 }
+
 function createNew() {
     $(document).ready(function() {
         let searchItem = $('#search').val();
@@ -220,17 +210,3 @@ function createNew() {
         }
     })
 }
-
-// Need to be written
-
-  
-  
-
-  
-
-
-
-
-
-
-
