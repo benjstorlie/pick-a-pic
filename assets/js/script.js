@@ -4,6 +4,11 @@ let pexelAPI = "SCqQHONMYkyRGofaJ7drvkznyjeDEyOhCuiy8qalGaJUISc0INFHfVqn";
 let picDiv = 0;
 
 window.onload = function() {
+    const state = JSON.parse(localStorage.getItem('state'));
+    if (state) {
+      $('#space').html(state.space);
+      $('.dropdown-menu').html(state.dropdown);
+    }
     initDragElement();
     initResizeElement();
 };
@@ -137,6 +142,14 @@ function selectPicture(term, photo) {
     $(`#${term}-text`).html(`<img width="200px" src="${photo}"/><br/>`);
 }
 
+function saveState() {
+    const state = {
+      space: $('#space').html(),
+      dropdown: $('.dropdown-menu').html()
+    };
+    localStorage.setItem('state', JSON.stringify(state));
+  }
+
   function deletecard(divtodelete) {
     let speechBtn = document.getElementById('speechBtn');
     console.log(divtodelete)
@@ -179,8 +192,8 @@ function fetchPicture(term) {
             picturesHTML += `<i>Image by: ${response.photos[i].photographer}</i><br/>`;
             picturesHTML += `<a class="btn" onclick="selectPicture('${term}', '${response.photos[i].src.medium}'); return false;">Select Picture</a><br/>`;
         }           
-        $('#space').append(`<div class="rounded popup">
-            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a></h5>
+        $('#space').append(`<div id="${term}" class="rounded popup">
+            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a><a class="delete" onclick="deletecard('${term}'); return false;">X</a></h5>
             <div id="${term}-text">
                 ${picturesHTML}
             </div>
