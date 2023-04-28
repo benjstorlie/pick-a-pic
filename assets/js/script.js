@@ -3,10 +3,46 @@ let pexelAPI = "SCqQHONMYkyRGofaJ7drvkznyjeDEyOhCuiy8qalGaJUISc0INFHfVqn";
 
 let picDiv = 0;
 
+// This array of colors will be used in the randomizeCardHeader function to generate a random color for each card header of the search results.
+let colorArray = [
+  '#FFFF00', 
+  '#FFD700', 
+  '#FFA500', 
+  '#FF4500', 
+  '#FF0000', 
+  '#C71585', 
+  '#800080',
+  '#483D8B',
+  '#0000FF',
+  '#008080',
+  '#008000',
+  '#9ACD32'  
+];
+
+function randomizeCardHeaderColor() {
+let cardHeaders = document.querySelectorAll(".popup-header");
+console.log(cardHeaders);
+for(var i = 0; i < cardHeaders.length; i++) {
+    
+    var backgroundColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+
+    cardHeaders[i].style.backgroundColor = backgroundColor
+
+    console.log(cardHeaders[i], backgroundColor);
+    }
+}
+
 window.onload = function() {
+    const state = JSON.parse(localStorage.getItem('state'));
+    if (state) {
+        $('#space').html(state.space);
+        $('.dropdown-menu').html(state.dropdown);
+    }
     initDragElement();
     initResizeElement();
+    randomizeCardHeaderColor();
 };
+
 function initDragElement() {
 var pos1 = 0,
     pos2 = 0,
@@ -133,6 +169,15 @@ function initResizeElement() {
     }
 }
 
+function selectPicture(term, photo) {
+    $(`#${term}-text`).html(`<img width="200px" src="${photo}"/><br/>`);
+}
+
+function deleteFromDropdown(term) {
+    $(`#dropdown-${term}`).remove();
+    saveState();
+}
+
 function saveState() {
     const state = {
       space: $('#space').html(),
@@ -141,8 +186,23 @@ function saveState() {
     localStorage.setItem('state', JSON.stringify(state));
   }
 
-
-
+  function deletecard(divtodelete) {
+    let speechBtn = document.getElementById('speechBtn');
+    console.log(divtodelete)
+    $(`#${divtodelete}`).remove();
+   let deletediv =  $(`#${divtodelete}`);
+   deletediv.remove()
+   console.log(deletediv)
+  // Check if speechBtn is defined before calling methods on it
+  if (speechBtn) {
+    speechBtn.style.display = 'none';
+    recognition.stop();
+  }
+  saveState();
+  deleteFromDropdown(divtodelete)
+}
+   
+  
 function fetchPicture(term) {
     console.log(term);
     let apiURL = "https://api.pexels.com/v1/search?query=" + term + "&size=small&per_page=10";
@@ -161,16 +221,22 @@ function fetchPicture(term) {
     .then(response => {
         console.log(response);
         let picturesHTML = '';
+        console.log(response.photos);
         for (let i = 0; i < response.photos.length; i++) {
             picturesHTML += `<img width="200px" src="${response.photos[i].src.medium}"/><br/>`;
             picturesHTML += `<i>Image by: ${response.photos[i].photographer}</i><br/>`;
+            picturesHTML += `<a class="btn" onclick="selectPicture('${term}', '${response.photos[i].src.medium}'); return false;">Select Picture</a><br/>`;
         }           
-        $('#space').append(`<div class="rounded popup">
-            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a></h5>
-            ${picturesHTML}
+        $('#space').append(`<div id="${term}" class="rounded popup">
+            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a><a class="delete" onclick="deletecard('${term}'); return false;">X</a></h5>
+            <div id="${term}-text">
+                ${picturesHTML}
+            </div>
         </div>`);
+
         console.log($('.dropdown-menu').children);
-        $('.dropdown-menu').append(`<li class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
+        $('.dropdown-menu').append(`<li id="dropdown-${term}" class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
+        /* Good time to save to localStorage HTML for the elements being created. */
         initDragElement();
         initResizeElement();
         saveState();
@@ -179,21 +245,11 @@ function fetchPicture(term) {
 
 }
 
-window.onload = function() {
-    const state = JSON.parse(localStorage.getItem('state'));
-    if (state) {
-      $('#space').html(state.space);
-      $('.dropdown-menu').html(state.dropdown);
-    }
-    initDragElement();
-    initResizeElement();
-  };
-
-
 function speak(term) {
     let utterance = new SpeechSynthesisUtterance(term);
     speechSynthesis.speak(utterance);
 }
+
 function createNew() {
     $(document).ready(function() {
         let searchItem = $('#search').val();
@@ -202,20 +258,3 @@ function createNew() {
         }
     })
 }
-
-// Need to be written
-
-function storeData() {
-
-}
-
-function deleteItem() {
-    
-}
-
-
-
-
-
-
-
