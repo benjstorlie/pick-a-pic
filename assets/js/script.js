@@ -142,6 +142,11 @@ function selectPicture(term, photo) {
     $(`#${term}-text`).html(`<img width="200px" src="${photo}"/><br/>`);
 }
 
+function deleteFromDropdown(term) {
+    $(`#dropdown-${term}`).remove();
+    saveState();
+}
+
 function saveState() {
     const state = {
       space: $('#space').html(),
@@ -162,9 +167,8 @@ function saveState() {
     speechBtn.style.display = 'none';
     recognition.stop();
   }
-
-localStorage.removeItem(divtodelete);
-
+  saveState();
+  deleteFromDropdown(divtodelete)
 }
    
   
@@ -200,7 +204,7 @@ function fetchPicture(term) {
         </div>`);
 
         console.log($('.dropdown-menu').children);
-        $('.dropdown-menu').append(`<li class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
+        $('.dropdown-menu').append(`<li id="dropdown-${term}" class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
         /* Good time to save to localStorage HTML for the elements being created. */
         initDragElement();
         initResizeElement();
