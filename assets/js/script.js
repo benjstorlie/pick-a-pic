@@ -19,6 +19,8 @@ let colorArray = [
   '#9ACD32'  
 ];
 
+// this function allows the card headers of the popup's to change color on refresh if they are still on the page/not cleared. 
+// also might not be needed anymore due to generating a random color for the card header during <h5> append.
 function randomizeCardHeaderColor() {
 let cardHeaders = document.querySelectorAll(".popup-header");
 console.log(cardHeaders);
@@ -227,8 +229,12 @@ function fetchPicture(term) {
             picturesHTML += `<i>Image by: ${response.photos[i].photographer}</i><br/>`;
             picturesHTML += `<a class="btn" onclick="selectPicture('${term}', '${response.photos[i].src.medium}'); return false;">Select Picture</a><br/>`;
         }           
+
+        var backgroundColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+
+        // added 'style="background-color: ${backgroundColor}"' to the <h5> to generate a random color whenever a popup is generated via search
         $('#space').append(`<div id="${term}" class="rounded popup">
-            <h5 class="popup-header modal-header--sticky">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a><a class="delete" onclick="deletecard('${term}'); return false;">X</a></h5>
+            <h5 class="popup-header modal-header--sticky" style="background-color: ${backgroundColor}">${term.toUpperCase()} <a class="speak" onclick="speak('${term}'); return false;">🔊</a><a class="delete" onclick="deletecard('${term}'); return false;">X</a></h5>
             <div id="${term}-text">
                 ${picturesHTML}
             </div>

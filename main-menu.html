@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+    <title>Pick-a-Pick | Home</title>
+
+    <link rel="stylesheet" href="assets/css/main-menu.css">
+</head>
+
+<body>
+    <!-- this centers the position of the main-container -->
+    <div class="position-container">
+        <div class="main-container slide-in-blurred-top accordion-div">
+            <div class="header-container">
+                <h1>
+                    Pick-a-Pick
+                </h1>
+            </div>
+
+            <!-- this holds all the buttons/accordians together -->
+            <button class="accordion">
+                <h3>About Us</h3>
+            </button>
+            <section class="panel text-center">
+                <p>
+                    Across the globe, we are presented with thousands of languages, from the billions who want to be
+                    heard.
+                </p>
+                <p>
+                    But among the crowd, you will be met with those who have the acquisition to speak a refined language
+                    of their own; one that many struggle to understand, but one that certainly needs to be heard.
+                </p>
+                <p>
+                    With this on-the-fly web application, we yearn to break the language barrier of communication
+                    between any and everyone. Whether they were born with a disability, or are putting forth effort in
+                    an attempt to understand one another.
+                </p>
+                <p>
+                    Through the utilization of images, our web application will convey exactly what the user needs; in
+                    order to bridge communication between all individuals.
+                </p>
+                <p>
+                    So cross the gap and connect.
+                </p>
+                <p>
+                    Pick-a-Pic.
+                </p>
+            </section>
+
+            <button class="accordion">
+                <h3>Tutorial</h3>
+            </button>
+            <section class="panel text-center">
+                <p>
+                    [INSERT VIDEO DEMONSTRATION OR PICTURES WITH MECHANICS]
+                </p>
+            </section>
+
+            <button class="accordion">
+                <h3>Getting Started</h3>
+            </button>
+            <section class="panel">
+                <a href="index.html">
+                    <div style="position: relative; text-align: center; margin: 1rem 0">
+                        <img src="assets/content/mock-up-link.png" alt="mock-up-link"
+                            style="height: 100%; width: 60vw; border: black solid;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <h3
+                                style="border: black solid; background-color: var(--anchor-text-bgc); border-radius: 2rem; padding: .5rem;">
+                                Create Your Own Layout</h3>
+                        </div>
+                    </div>
+                </a>
+                <a href="index.html">
+                    <div style="position: relative; text-align: center; margin: 0 0 1rem 0">
+                        <img src="assets/content/mock-up-link.png" alt="mock-up-link"
+                            style="height: 100%; width: 60vw; border: black solid;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <h3
+                                style="border: black solid; background-color: var(--anchor-text-bgc); border-radius: 2rem; padding: .5rem;">
+                                Default</h3>
+                        </div>
+                    </div>
+                </a>
+            </section>
+
+        </div>
+    </div>
+    <!-- this allows the accordian to open on click, as well as close whichever section that was open prior that is not the current focus -->
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    let active = document.querySelectorAll(".accordion-div .accordion.active");
+                    for (let j = 0; j < active.length; j++) {
+                        active[j].classList.remove("active");
+                        active[j].nextElementSibling.style.maxHeight = null;
+                    }
+                    this.classList.toggle("active");
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
