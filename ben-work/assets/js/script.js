@@ -257,3 +257,35 @@ function createNew() {
         }
     })
 }
+
+function newCard() {
+    const newCard = $('<div>').addClass('card');
+
+    const newInput=$("<input type=text placeholder='add title' class='w-100'></input>");
+    newCard.append($("<h5>").addClass("card-heading").append(newInput));
+    const newButton=$("<button>").addClass('btn btn-primary').text("add image").click(function() {newModal(newInput.val())});
+    newCard.append("<div>").addClass("card-body").append(newButton);
+
+  $('#space').append($("<div>").addClass("col").append(newCard));
+}
+
+function addHeading() {
+
+}
+
+function newModal(jQueryObject,term) {
+    const modal=$("<div class='modal' tabindex='-1' role='dialog'>");
+    const modalDialog=$("<div class='modal-dialog' role='document'>")
+    const modalContent=$("<div class='modal-content'>"
+    );
+    const modalHeader=$("<div class='modal-header'>");
+    const modalTitle=$("<h5 class='modal-title'>");
+    const modalInput=$("<input type='text' value="${term}">");
+    const modal 
+    const modalFooter=$(`
+          <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>`)
+
+}
