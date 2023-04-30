@@ -1,0 +1,32 @@
+.h-10 {
+  height: 10%;
+}
+
+.h-90 {
+  height: 90%;
+}
+
+.card-image {
+  max-height: 100%;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
+  border: solid 1px black;
+}
+
+.card-img-btm {
+  object-fit: cover;
+}
+
+.card {
+  max-height: 100%;
+  overflow: scroll;
+}
+
+#space{
+  overflow: scroll;
+}
+
+#window-container {
+  max-height: 100%;
+}

@@ -15,52 +15,25 @@
 
   <div id="window-container" class="vw-100 vh-100 container-fluid">
     <div class="row h-100">
-      <div class="col-1 d-flex align-items-center bg-dark border"> <!-- Menu goes here -->
+      <div class="col-1 d-flex flex-column justify-content-center bg-dark border"> <!-- Menu goes here -->
         <div class="h-25 w-100 btn-group-vertical d-flex flex-column" role="group">
-          <div role="button" type="button" class="btn btn-lg btn-primary">🔙</div>
+          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="gotoHomePage()">🔙</div>
           <div role="button" type="button" class="btn btn-lg btn-success">💾</div>
           <div role="button" type="button" class="btn btn-lg btn-danger">🗑</div>
-          <div role="button" type="button" class="btn btn-lg btn-info">▶️</div>
+          <div role="button" type="button" class="btn btn-lg btn-info" onclick="deploy()">▶️</div>
           <div role="button" type="button" class="btn btn-lg btn-warning btn-block" onclick="newCard()"><img src="./assets/images/plus-sign.svg" class="w-100"></div>
         </div>
       </div>
-      <div class="col"> <!-- Editor goes here -->
-        <div class="row bg-secondary">
-          <div class="col-12 border"> <!-- Either heading-card editor, or add heading button -->
-            <button type="button" class="btn btn-lg btn-warning">Add a heading or question!</button>
-          </div>
+      <div id="editor" class="col d-flex flex-column">
+         <!-- Editor goes here -->
+
+        <div id="heading-area"> <!-- Either heading-card editor, or add heading button -->
+          <button type="button" class="btn btn-lg btn-warning">Add a heading or question!</button>
         </div>
-        <div id="space" class="row bg-dark g-2">
+        <div id="space" class="card-deck flex-grow-1 bg-dark p-2">
           <!-- Somehow accommodate for variable numbers of cards -->
-          <div class="col">
-            <div class="card">
-              <div class="card-heading">
-                <input type="text" class="w-100" placeholder="add title"></input>
-              </div>
-              <img src="./img-sample.png" class="card-img-bottom w-100">
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">
-                  Sample
-                </h5>
-              </div>
-              <img src="./img-sample.png" class="card-img-bottom w-100">
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">
-                  Sample
-                </h5>
-              </div>
-              <img src="./img-sample.png" class="card-img-bottom w-100">
-            </div>
-          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -69,10 +42,13 @@
 
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-  <script src="./assets/js/script.js"></script>
+    crossorigin="anonymous">
+  </script>
+  
+  <script src="./assets/js/editor-script.js"></script>
   <div id="space">
   </div>
 </body>

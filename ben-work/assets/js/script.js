@@ -273,19 +273,19 @@ function addHeading() {
 
 }
 
-function newModal(jQueryObject,term) {
-    const modal=$("<div class='modal' tabindex='-1' role='dialog'>");
-    const modalDialog=$("<div class='modal-dialog' role='document'>")
-    const modalContent=$("<div class='modal-content'>"
-    );
-    const modalHeader=$("<div class='modal-header'>");
-    const modalTitle=$("<h5 class='modal-title'>");
-    const modalInput=$("<input type='text' value="${term}">");
-    const modal 
-    const modalFooter=$(`
-          <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
-  </div>`)
-
-}
+//function newModal(jQueryObject,term) {
+//    const modal=$("<div class='modal' tabindex='-1' role='dialog'>");
+//    const modalDialog=$("<div class='modal-dialog' role='document'>")
+//    const modalContent=$("<div class='modal-content'>"
+//    );
+//    const modalHeader=$("<div class='modal-header'>");
+//    const modalTitle=$("<h5 class='modal-title'>");
+//    const modalInput=$("<input type='text' value="${term}">");
+//    const modal 
+//    const modalFooter=$(`
+//          <div class="modal-footer">
+//    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+//    <button type="button" class="btn btn-primary">Save changes</button>
+//  </div>`)
+//
+//}`
