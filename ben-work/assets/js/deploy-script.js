@@ -1,22 +1,24 @@
 const space = $("#space");
-
+const yesnoPageData = JSON.parse(`{"stamp":"yesno","title":"Yes/No","heading":{"show":false,"stamp":"heading","title":"","src":""},"cardOrder":["yes","no"],"cards":{"yes":{"stamp":"yes","show":true,"title":"yes","src":"./../assets/symbols/u2714-heavycheckmark.svg"},"no":{"stamp":"no","show":true,"title":"no","src":"./../assets/symbols/u1F5D9-cancellationx.svg"}}}`);
 
 window.onload = function() {
 
-  let pageData = getPageData();
+  let pageData;
+  if (window.location.pathname.split('/').pop() == "yesno.html") {
+    pageData=yesnoPageData;
+  } else {
+    pageData = getPageData();
+  }
   console.log(pageData);
 
-  displayCardsAndAttachModals();
+  displayCards();
 
-  function displayCardsAndAttachModals() {
-    if (!pageData.cardOrder.length) {
-      $("#space").append(displayCard());
-    } else {
-      for (i=0;i<pageData.cardOrder.length;i++) {
-        space.append(displayCard(pageData.cards[pageData.cardOrder[i]]));
-        attachModal(pageData.cardOrder[i]);
-      }
+  function displayCards() {
+
+    for (i=0;i<pageData.cardOrder.length;i++) {
+      space.append(displayCard(pageData.cards[pageData.cardOrder[i]]));
     }
+    
   }
 
 }
@@ -26,48 +28,27 @@ function gotoHomePage() {
   window.location.assign("./homepage.html");
 }
 
-function deploy() {
-  // include some kind of saving function, just in case?
-  window.location.assign("./deploy.html"+window.location.search);
-}
-
 function displayCard(cardData) {
   // cardData should already come with a stamp
   // This returns a JQuery <div> object
   // The <div> has Bootstrap class="card", and has a card object inside
 
-  const card=$("<div>").addClass("card h-100").attr("id","card-"+cardData.stamp);
-  card.html(`
-      <div class="card-header">
-      <form id="form-${cardData.stamp}">
-      <input type="text" class="form-control" placeholder="add title" id="input-${cardData.stamp}">
-      </form>
-    </div>
-    <div class="card-body">
-      <img id="img-${cardData.stamp}" role="button" class="btn card-image" data-toggle="modal" data-target="#modal-${cardData.stamp}">
-    </div>
-  `)
-
+  const card=$("<div>").addClass("card").attr("id","card-"+cardData.stamp);
+  
   if (cardData.title) {
-    card.find("input").val() = cardData.title;
+    card.append(`
+      <div class="card-header>
+        <h5 class="card-title">${cardData.title}</h5>
+      </div>
+    `)
+
+    // Add event handler for clicking card to speak cardData.title
+
   }
-
-  card.find("form").submit(function(event) {
-    event.preventDefault();
-    setCardTitle( $(event.target).find("input").val());
-  })
-
-
-
-  let image=card.find("img");
-  image.click(function() {
-    $('#modal-'+cardData.stamp).modal('show');
-  })
-
-  if (!cardData.src) {
-    image.attr("src", "./assets/images/plus-sign.svg");
-  } else {
-    image.attr("src", cardData.src);
+  if (cardData.src) {
+    card.append(`
+      <img class="card-img-btm" src=${cardData.src}>
+    `)
   }
 
   return card

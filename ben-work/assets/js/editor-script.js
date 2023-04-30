@@ -43,7 +43,7 @@ function displayCard(cardData) {
       <input type="text" class="form-control" placeholder="add title" id="input-${cardData.stamp}">
       </form>
     </div>
-      <img id="img-${cardData.stamp}" role="button" class="btn card-img-btm" data-toggle="modal" data-target="#modal-${cardData.stamp}">
+      <img id="img-${cardData.stamp}" role="button" class="btn" data-toggle="modal" data-target="#modal-${cardData.stamp}">
   `)
 
   if (cardData.title) {
@@ -63,7 +63,7 @@ function displayCard(cardData) {
   })
 
   if (!cardData.src) {
-    image.attr("src", "./assets/images/plus-sign.svg");
+    image.attr("src", "./assets/symbols/u2795-heavyplussign.svg");
   } else {
     image.attr("src", cardData.src);
   }

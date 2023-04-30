@@ -30,3 +30,27 @@
 #window-container {
   max-height: 100%;
 }
+
+.page-card img {
+  object-fit: contain;
+  height: 200px;
+}
+
+.page-card {
+  width: 25%;
+}
+
+.sub-image {
+  display: inline;
+  width: 48%;
+}
+
+.btn-symbol {
+  height: 20px;
+  max-height: 20px;
+}
+
+.btn-lg .btn-symbol {
+  height: 50px;
+  max-height: 50px;
+}

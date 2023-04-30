@@ -15,13 +15,13 @@
 
   <div id="window-container" class="vw-100 vh-100 container-fluid">
     <div class="row h-100">
-      <div class="col-1 d-flex flex-column justify-content-center bg-dark border"> <!-- Menu goes here -->
+      <div class="col-2 d-flex flex-column justify-content-center bg-dark border"> <!-- Menu goes here -->
         <div class="h-25 w-100 btn-group-vertical d-flex flex-column" role="group">
-          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="gotoHomePage()">🔙</div>
-          <div role="button" type="button" class="btn btn-lg btn-success">💾</div>
-          <div role="button" type="button" class="btn btn-lg btn-danger">🗑</div>
-          <div role="button" type="button" class="btn btn-lg btn-info" onclick="deploy()">▶️</div>
-          <div role="button" type="button" class="btn btn-lg btn-warning btn-block" onclick="newCard()"><img src="./assets/images/plus-sign.svg" class="w-100"></div>
+          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="gotoHomePage()"><img class="btn-symbol" src="./assets/symbols/u1F519-backwithleftwardsarrow.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-success"><img class="btn-symbol" src="./assets/symbols/u1F4BE-floppydisk2.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-danger"><img class="btn-symbol" src="./assets/symbols/u1F5D1-wastebasket.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-info" onclick="deploy()"><img class="btn-symbol" src="./assets/symbols/u25B6-blackrightpointingarrow.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-warning btn-block" onclick="newCard()"><img src="./assets/symbols/u2795-heavyplussign.svg" class="btn-symbol"></div>
         </div>
       </div>
       <div id="editor" class="col d-flex flex-column">
@@ -49,8 +49,6 @@
   </script>
   
   <script src="./assets/js/editor-script.js"></script>
-  <div id="space">
-  </div>
 </body>
 
 </html>
