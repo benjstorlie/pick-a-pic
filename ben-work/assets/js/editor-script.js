@@ -89,7 +89,7 @@ function displayCard(cardData={}) {
 
   card.find("form").submit(function(event) {
     event.preventDefault();
-    setCardTitle(stamp, $(event.target).find("input").val());
+    setCardTitle(stamp, $(this).find("input").val());
   });
 
 
@@ -152,7 +152,7 @@ function displayHeading(cardData) {
 
   card.find("form").submit(function(event) {
     event.preventDefault();
-    setHeadingTitle($(event.target).find("input").val());
+    setHeadingTitle($(this).find("input").val());
   });
 
 
@@ -205,16 +205,18 @@ function attachModal(stamp) {
     <div class="modal fade" id="modal-${stamp}" data-stamp="${stamp}" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header flex-wrap">
             <h4 class="modal-title">Add Image</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-          </div>
-          <div class="modal-body">
-            <form>
+            <div class="w-100"></div>
+            <form id="modal-form-${stamp}" data-stamp="${stamp}" class="d-block">
             <input type="text" class="form-control" id="search-input-${stamp}" data-stamp="${stamp}" placeholder="search">
             </form>
+          </div>
+          <div id="modal-body-${stamp}" class="modal-body" data-stamp="${stamp}">
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="saveImgBtn-${stamp}" data-stamp="${stamp}">Save</button>
@@ -228,15 +230,98 @@ function attachModal(stamp) {
   // Append the modal to the body of the document
   $("#window-container").append(modalHtml);
 
+  // attach submit event handler
+  $("#modal-form-"+stamp).submit(showSearchResults);
+
   // The close buttons on the modals aren't working right now.  Maybe a problem with popper.js?  Either way, I just added it manually here.
   $("#modal-"+stamp+" button[data-dismiss='modal']").click(function() {
       $("#modal-"+stamp).modal("hide");
     }
   )
 
-  // Attach a click event handler to the save button.  function also closes the modal
-  $("#saveImgBtn-"+stamp).click({stamp:stamp},saveNewImg);
+  $("#saveImgBtn-"+stamp).click(saveNewImg);
+
 }
+
+function setSaveBtnData(event) {
+  // Add the newImg's src to the modal save button as its data-src attribute
+  // (Note: this does not change the html, just the data set with jquery)
+
+  let newImg = $(event.target);
+  let src = newImg.attr("src");
+  let stamp = newImg.data("stamp");
+
+  console.log("select: "+src);
+
+  // This shows which image is currently selected
+  $('#modal-body-'+stamp+' .img-search-results').removeClass('active');
+  newImg.addClass('active');
+
+  $("#saveImgBtn-"+stamp).attr("data-src",src);
+}
+
+function saveNewImg(event) {
+  // $(this) is the save button
+  // get new img src from user input
+  // this also closes the modal
+
+  let saveBtn = $(event.target);
+  let src = saveBtn.data("src");
+  let stamp = saveBtn.data("stamp");
+  
+  // set new img src in local storage
+  setImgSrc(stamp,src);
+  console.log(stamp+": "+src)
+  
+  // close the modal
+  $("#modal-"+stamp).modal("hide");
+
+  // re-set the image in the card
+  $("#img-"+stamp).attr("src",src);
+}
+
+function showSearchResults(event) {
+  // This gets called when the modal input is submitted
+  event.preventDefault();
+  const form=$(this);
+  const term=form.find("input").val();
+  const stamp=form.data("stamp");
+  $("#modal-body-"+stamp).empty();
+
+  fetchPicture(term,stamp);
+}
+
+function fetchPicture(term,stamp) {
+  if (!term) {return}
+
+  console.log(term);
+  let apiURL = "https://api.pexels.com/v1/search?query=" + term + "&size=small&per_page=10";
+  fetch(apiURL, {
+      method: 'GET',
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "User-Agent": "Pexels/JavaScript",
+          Authorization: pexelAPI,
+      },
+  })
+  .then(response => {
+      return response.json();
+  })
+  .then(response => {
+      console.log(response);
+      let picturesHTML = '';
+      console.log(response.photos);
+      for (let i = 0; i < response.photos.length; i++) {
+          picturesHTML += `<img class="btn img-search-results" src="${response.photos[i].src.medium}" data-src=="${response.photos[i].src.medium}" data-stamp="${stamp}"><br/>`;
+          picturesHTML += `<i>Image by: ${response.photos[i].photographer}</i><br/>`;
+      }           
+      $("#modal-body-"+stamp).html(picturesHTML);
+      $("#modal-body-"+stamp+" .img-search-results").click(setSaveBtnData);
+  })
+
+}
+
 
 function newCard() {
   // If there is already a hidden card, show that one, otherwise,
@@ -264,6 +349,8 @@ function newCard() {
   space.append(displayCard(cardData));
   attachModal(stamp);
 }
+
+
 
 // **** functions for saving and getting from local storage ****
 
@@ -393,21 +480,6 @@ function setImgSrc(stamp,src) {
   let pageData = getPageData();
   pageData.cards[stamp].src = src;
   setPageData(pageData);
-}
-
-
-function saveNewImg(event) {
-  // get new img src from user input
-  // **TODO** How are we getting the new image's src?
-  // this also closes the modal
-
-  let src = "./assets/images/img-sample.png";
-  
-  // set new img src in local storage
-  setImgSrc(event.stamp,src);
-  
-  // close the modal
-  $("#modal-"+event.stamp).modal("hide");
 }
 
 function speak(term) {

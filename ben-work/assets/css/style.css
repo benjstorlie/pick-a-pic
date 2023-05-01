@@ -33,6 +33,16 @@
   width:200px;
 }
 
+.img-search-results {
+  width:200px;
+}
+
+.img-search-results.active {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: #fff;
+}
+
 .card {
   max-height: 100%;
   height:fit-content;
@@ -43,13 +53,17 @@
   position: relative;
 }
 
-#heading .close {
+#heading .close,
+.modal .close{
   position: absolute;
   right: 1rem;
   top: 1rem;
   z-index: 3;
 }
 
+.modal-body {
+  overflow: auto;
+}
 
 #space {
   overflow-clip-margin: 0px;
