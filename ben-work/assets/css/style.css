@@ -69,14 +69,6 @@
   z-index: 3;
 }
 
-.modal-body {
-  overflow: auto;
-}
-
-#space {
-  overflow-clip-margin: 0px;
-}
-
 .page-card img {
   object-fit: contain;
   height: 200px;
