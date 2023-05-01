@@ -63,7 +63,7 @@ function displayCard(cardData={}) {
 
   let stamp = cardData.stamp;
 
-  const card=$("<div>").addClass("card").attr("id","card-"+stamp).attr("data-stamp",stamp);
+  const card=$("<div>").addClass("card m-1").attr("id","card-"+stamp).attr("data-stamp",stamp);
   card.html(`
       <div class="card-header d-flex flex-row">
         <form id="form-${stamp}" data-stamp="${stamp}" class="flex-grow-1">
@@ -100,6 +100,7 @@ function displayCard(cardData={}) {
 
   let image=card.find(".img-card");
   image.click(function() {
+    preShowModal(stamp);
     $('#modal-'+stamp).modal('show');
   });
 
@@ -124,9 +125,9 @@ function displayHeading(cardData) {
   // This returns a JQuery <div> object
   // The <div> has Bootstrap class="card" (in the current layout setup)
 
-  const card=$("<div>").addClass("h-100 w-100 d-flex flex-row").attr("id","heading");
+  const card=$("<div>").addClass("card my-1 d-flex flex-row").attr("id","heading");
   card.html(`
-      <div class="flex-grow-2">
+      <div class="card-left-sider">
         <form id="form-heading">
           <div class="input-group">
             <div class="input-group-prepend">
@@ -138,9 +139,7 @@ function displayHeading(cardData) {
           </div>
         </form>
       </div>
-      <div class="flex-grow-1">
         <img id="img-heading" role="button" class="btn img-heading" data-toggle="modal" data-target="#modal-heading">
-      </div>
       <button id="delete-heading" type="button" class="close" aria-label="Delete">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -228,7 +227,7 @@ function attachModal(stamp) {
   `;
   
   // Append the modal to the body of the document
-  $("#window-container").append(modalHtml);
+  $("body").append(modalHtml);
 
   // attach submit event handler
   $("#modal-form-"+stamp).submit(showSearchResults);
@@ -251,13 +250,14 @@ function setSaveBtnData(event) {
   let src = newImg.attr("src");
   let stamp = newImg.data("stamp");
 
-  console.log("select: "+src);
-
   // This shows which image is currently selected
   $('#modal-body-'+stamp+' .img-search-results').removeClass('active');
   newImg.addClass('active');
 
+  // Saving both the html "data-src" attribute and the jquery data set.
   $("#saveImgBtn-"+stamp).attr("data-src",src);
+  $("#saveImgBtn-"+stamp).data("src",src);
+
 }
 
 function saveNewImg(event) {
@@ -281,6 +281,7 @@ function saveNewImg(event) {
 
   // re-set the image in the card
   $("#img-"+stamp).attr("src",src);
+  console.log($("#img-"+stamp).attr("src"));
 }
 
 function showSearchResults(event) {
@@ -292,6 +293,19 @@ function showSearchResults(event) {
   $("#modal-body-"+stamp).empty();
 
   fetchPicture(term,stamp);
+}
+
+function preShowModal(stamp) {
+  // If something hasn't already been searched for, and the image has a title, go ahead and search for that by default, otherwise do nothing.
+
+  const modalInput = $("#modal-"+stamp).find("input");
+  if (!modalInput.val()) {
+    const cardInputVal = $("#card-"+stamp).find("input").val();
+    if (cardInputVal) {
+      modalInput.val(cardInputVal);
+      fetchPicture(cardInputVal,stamp);
+    }
+  }
 }
 
 function fetchPicture(term,stamp) {

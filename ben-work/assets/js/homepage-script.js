@@ -50,7 +50,7 @@ function addPageCard(pageData) {
     title=pageData.title;
   }
   console.log(pageData.stamp);
-  const pageCard = $("<div>").addClass("card page-card").attr("data-stamp",pageData.stamp)
+  const pageCard = $("<div>").addClass("card page-card m-1").attr("data-stamp",pageData.stamp)
     .html(`
       <img class="card-img-top img-page-card">
       <div class="card-footer">

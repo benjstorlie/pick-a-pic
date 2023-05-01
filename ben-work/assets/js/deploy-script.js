@@ -22,7 +22,9 @@ window.onload = function() {
   }
 
   for (i=0;i<pageData.cardOrder.length;i++) {
-    space.append(displayCard(pageData.cards[pageData.cardOrder[i]]));
+    if (pageData.cards[pageData.cardOrder[i]].show) {
+      space.append(displayCard(pageData.cards[pageData.cardOrder[i]]));
+    }
   }
 
 }
@@ -37,7 +39,7 @@ function displayCard(cardData) {
   // This returns a JQuery <div> object
   // The <div> has Bootstrap class="card", and has a card object inside
 
-  const card=$("<div>").addClass("card").attr("id","card-"+cardData.stamp);
+  const card=$("<div>").addClass("card m-1").attr("id","card-"+cardData.stamp);
   
   if (cardData.title) {
     card.append(`
@@ -54,7 +56,7 @@ function displayCard(cardData) {
   }
   if (cardData.src) {
     card.append(`
-      <img class="card-img-btm img-deploy-card" src=${cardData.src}>
+      <img class="card-img-btm p-1 img-deploy-card" src=${cardData.src}>
     `)
   }
 
@@ -66,11 +68,11 @@ function displayHeading(cardData) {
   // This returns a JQuery <div> object
   // The <div> has Bootstrap class="card", and has a card object inside
 
-  const card=$("<div>").addClass("d-flex flex-row").attr("id","heading");
+  const card=$("<div>").addClass("card d-flex flex-row").attr("id","heading");
   
   if (cardData.title) {
     card.append(`
-      <div class="flex-grow-2">
+      <div class="card-left-sider">
         <h5>${cardData.title}</h5>
       </div>
     `)
@@ -83,9 +85,7 @@ function displayHeading(cardData) {
   }
   if (cardData.src) {
     card.append(`
-      <div class="flex-grow-1">
-        <img class ="img-deploy-heading"src=${cardData.src}>
-      </div>
+        <img class ="img-deploy-heading" src=${cardData.src}>
     `)
   }
 
