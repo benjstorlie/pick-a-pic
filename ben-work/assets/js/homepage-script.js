@@ -1,6 +1,13 @@
 window.onload = function() {
 
   // Go through local storage and populate the pages card deck with the user's saved pages
+
+  populatePageList();
+  addFooterButtons();
+  $("#card-yesno .btn-edit").addClass("disabled").attr( "aria-disabled","true");
+  $("#card-yesno .btn-delete").addClass("disabled").attr( "aria-disabled","true");
+  $("#card-sample .btn-edit").addClass("disabled").attr( "aria-disabled","true");
+  $("#card-sample .btn-delete").addClass("disabled").attr( "aria-disabled","true");
 }
 
 function populatePageList() {
@@ -17,7 +24,7 @@ function populatePageList() {
     if (localStorage.hasOwnProperty(key)) {
       try {
         const item = JSON.parse(localStorage.getItem(key));
-        if (item.hasOwnProperty('stamp') && key === item.stamp) {
+        if (item.hasOwnProperty('stamp') && (key == item.stamp)) {
           // The item is in the correct format
           // Add a new Page Card using the parsed pageData
           addPageCard(item);
@@ -36,18 +43,58 @@ function addPageCard(pageData) {
   // Format and add to the page list element a new page card, using the information in pageData
   // Make sure to add "data-stamp = ${pageData.stamp}" in useful places.
 
-  let cardHtml = `
-    <div class="card page-card">
-      <img class="card-img-top img-page-card w-100" src="./assets/images/img-sample.png">
+  let title;
+  if (!pageData.title) {
+    title="Untitled";
+  } else {
+    title=pageData.title;
+  }
+  console.log(pageData.stamp);
+  const pageCard = $("<div>").addClass("card page-card").attr("data-stamp",pageData.stamp)
+    .html(`
+      <img class="card-img-top img-page-card">
       <div class="card-footer">
         <h5 class="card-title">
-          ${pageData.title}
+          ${title}
         </h5>
       </div>
-    </div>
-  `;
+  `);
 
+  // This gets an image src for the page-card using its cards' images
+  pageCard.find(".img-page-card").attr("src",pageCardImgSrc(pageData));
   
+  $("#pages-list").append(pageCard);
+}
+
+function pageCardImgSrc(pageData) {
+  // This function returns an image src for the page-card of the page with the given pageData.
+  // It is called in addPageCard(): `pageCard.find(".img-card").attr(pageCardImgSrc(pageData));`
+  // If there is a heading image, that will be the page-card's image
+  // Otherwise it will pick one of the images from the cards
+  // If there aren't any of those, it will return a sample image.
+
+  if (pageData.heading.src) {
+    return pageData.heading.src
+  }
+
+  const cardsObject = pageData.cards;
+
+  // This gives an array of all the image sources of the shown cards in the page
+  // The array will be empty if there are no images
+  const imageSources = 
+    Object.keys(cardsObject).map(key => {
+      if (cardsObject[key].show && cardsObject[key].src) {
+        return cardsObject[key].src
+      }
+    })
+    .filter(Boolean)
+  ;
+
+  if (imageSources.length) {
+    return imageSources[0];
+  }
+
+  return "./assets/images/img-sample.png"
 
 }
 
@@ -56,13 +103,56 @@ function addFooterButtons() {
   // It might be good to define each button and it's function separately
   // Need to have some way to get the page's stamp
   
+  let buttonGroup = $('<div>').addClass("btn-group w-100").attr("role","group");
 
-  $(".card-footer").append(`
-  <div class="btn-group w-100" role="group">
-    <button class="btn btn-success disabled"><img src="./assets/symbols/u25B6-blackrightpointingarrow.svg" class="btn-symbol"></button>
-    <button class="btn btn-primary" onclick="newPage()"><img src="./assets/symbols/u270F-pencil.svg" class="btn-symbol"></button>
-  </div>
-  `);
+  let deployBtn = footerButton("btn-success btn-deploy","u25B6-blackrightpointingarrow",deployPage)
+  let editBtn = footerButton("btn-primary btn-edit","u270F-pencil",editPage);
+  let copyBtn = footerButton("btn-warning btn-copy","u1F4CB-clipboard",copyPage );
+  let deleteBtn = footerButton("btn-danger btn-delete", "u1F5D1-wasteBasket",deletePage);
+
+  buttonGroup.append(deployBtn).append(editBtn).append(copyBtn).append(deleteBtn);
+
+  $(".card-footer").append(buttonGroup);
+}
+
+// ** Footer button functions
+
+function footerButton(btnClass,symbolFileName,fun) {
+  // return a jquery button with some features
+  return $("<button>")
+    .addClass("btn btn-sm "+btnClass)
+    .append("<img src='./assets/symbols/"+symbolFileName+".svg' class='btn-symbol'>")
+    .click(fun);
+}
+
+function deployPage(event) {
+
+  const stamp = $(event.target).closest(".card").data("stamp");
+  window.location.assign("./deploy.html?page="+stamp)
+}
+
+function editPage(event) {
+  
+  const stamp = $(event.target).closest(".card").data("stamp");
+  window.location.assign("./editor.html?page="+stamp)
+}
+
+function copyPage(event) {
+
+  const stamp = $(event.target).closest(".card").data("stamp");
+  const pageData = JSON.parse(localStorage.getItem(stamp));
+  newPage(pageData);
+
+}
+
+function deletePage(event) {
+
+  // ** make warning
+
+  const pageCard = $(event.target).closest(".card")
+  const stamp = pageCard.data("stamp");
+  localStorage.removeItem(stamp);
+  pageCard.remove();
 
 }
 
@@ -74,8 +164,6 @@ function newPage(pageData=undefined) {
   // execute saveAllPageData() to create a new space in localstorage
 
   let stamp = new Date().getTime();
-
-  console.log(pageData);
 
   if (!pageData) {
     pageData = {
@@ -91,7 +179,6 @@ function newPage(pageData=undefined) {
       src: ''
     };
     pageData.cardOrder=[stamp+2];
-    console.log(pageData);
   } else {
     pageData.stamp = stamp;
   }
