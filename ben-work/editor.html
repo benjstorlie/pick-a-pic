@@ -13,8 +13,15 @@
 
 <body>
 
-  <div id="window-container" class="vw-100 vh-100 container-fluid">
-    <div class="row h-100">
+  <div id="window-container" class="vw-100 vh-100 container-fluid d-flex flex-column">
+    <div id="page-title-area" class="row">
+      <div  class="col-12">
+        <form id="page-title-form">
+          <input type="text" class="form-control" placeholder="add page title" id="page-title-input">
+        </form>
+      </div>
+    </div>
+    <div class="row flex-grow-1">
       <div class="col-2 d-flex flex-column justify-content-center bg-dark border"> <!-- Menu goes here -->
         <div class="h-25 w-100 btn-group-vertical d-flex flex-column" role="group">
           <div role="button" type="button" class="btn btn-lg btn-primary" onclick="gotoHomePage()"><img class="btn-symbol" src="./assets/symbols/u1F519-backwithleftwardsarrow.svg"></div>
@@ -24,13 +31,13 @@
           <div role="button" type="button" class="btn btn-lg btn-warning btn-block" onclick="newCard()"><img src="./assets/symbols/u2795-heavyplussign.svg" class="btn-symbol"></div>
         </div>
       </div>
-      <div id="editor" class="col d-flex flex-column">
+      <div id="editor" class="col-10 d-flex flex-column">
          <!-- Editor goes here -->
 
         <div id="heading-area"> <!-- Either heading-card editor, or add heading button -->
-          <button type="button" class="btn btn-lg btn-warning">Add a heading or question!</button>
+          
         </div>
-        <div id="space" class="card-deck flex-grow-1 bg-dark p-2">
+        <div id="space" class="card-deck d-flex flex-row flex-grow-1 bg-dark p-2">
           <!-- Somehow accommodate for variable numbers of cards -->
         </div>
 

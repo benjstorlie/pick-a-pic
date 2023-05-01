@@ -6,6 +6,10 @@
   height: 90%;
 }
 
+#page-title-area {
+  height:fit-content;
+}
+
 .card-image {
   max-height: 100%;
   width: auto;
@@ -14,14 +18,39 @@
   border: solid 1px black;
 }
 
-.card-img-btm {
-  object-fit: cover;
+.img-card {
+  object-fit: contain;
+  width: 200px;
+}
+
+.img-heading {
+  object-fit: contain;
+  width: 200px;
+}
+
+.img-deploy-heading,
+.img-deploy-card {
+  width:200px;
 }
 
 .card {
   max-height: 100%;
+  height:fit-content;
   overflow: scroll;
+  position: relative;
 }
+
+#heading {
+  position: relative;
+}
+
+#heading .close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 3;
+}
+
 
 #space{
   overflow: scroll;
@@ -46,8 +75,8 @@
 }
 
 .btn-symbol {
-  height: 20px;
-  max-height: 20px;
+  height: 30px;
+  max-height: 30px;
 }
 
 .btn-lg .btn-symbol {

@@ -1,24 +1,28 @@
 const space = $("#space");
-const yesnoPageData = JSON.parse(`{"stamp":"yesno","title":"Yes/No","heading":{"show":false,"stamp":"heading","title":"","src":""},"cardOrder":["yes","no"],"cards":{"yes":{"stamp":"yes","show":true,"title":"yes","src":"./../assets/symbols/u2714-heavycheckmark.svg"},"no":{"stamp":"no","show":true,"title":"no","src":"./../assets/symbols/u1F5D9-cancellationx.svg"}}}`);
+const headingArea = $("#heading-area");
+
+const yesnoPageData = JSON.parse(`{"stamp":"yesno","title":"Yes/No","heading":{"show":false,"stamp":"heading","title":"","src":""},"cardOrder":["yes","no"],"cards":{"yes":{"stamp":"yes","show":true,"title":"yes","src":"./assets/symbols/u2714-heavycheckmark.svg"},"no":{"stamp":"no","show":true,"title":"no","src":"./assets/symbols/u1F5D9-cancellationx.svg"}}}`);
 
 window.onload = function() {
 
   let pageData;
-  if (window.location.pathname.split('/').pop() == "yesno.html") {
+  if (window.location.search == "?page=yesno") {
     pageData=yesnoPageData;
   } else {
     pageData = getPageData();
   }
   console.log(pageData);
 
-  displayCards();
+  if (pageData.title) {
+    console.log(pageData.title);
+  }
 
-  function displayCards() {
+  if (pageData.heading) {
+    headingArea.append(displayHeading(pageData.heading));
+  }
 
-    for (i=0;i<pageData.cardOrder.length;i++) {
-      space.append(displayCard(pageData.cards[pageData.cardOrder[i]]));
-    }
-    
+  for (i=0;i<pageData.cardOrder.length;i++) {
+    space.append(displayCard(pageData.cards[pageData.cardOrder[i]]));
   }
 
 }
@@ -37,76 +41,56 @@ function displayCard(cardData) {
   
   if (cardData.title) {
     card.append(`
-      <div class="card-header>
+      <div class="card-header">
         <h5 class="card-title">${cardData.title}</h5>
       </div>
     `)
 
     // Add event handler for clicking card to speak cardData.title
+    card.click(function() {
+      speak(cardData.title);
+    })
 
   }
   if (cardData.src) {
     card.append(`
-      <img class="card-img-btm" src=${cardData.src}>
+      <img class="card-img-btm img-deploy-card" src=${cardData.src}>
     `)
   }
 
   return card
 }
 
-// Create a function to attach a modal to the document
-function attachModal(stamp) {
-  // Create the modal HTML elements
-  var modalHtml = `
-    <div class="modal fade" id="modal-${stamp}" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Add Image</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-            <input type="text" class="form-control" id="search-input-${stamp}" placeholder="search">
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="saveImgBtn-${stamp}">Save</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+function displayHeading(cardData) {
+  // cardData should already come with a stamp
+  // This returns a JQuery <div> object
+  // The <div> has Bootstrap class="card", and has a card object inside
+
+  const card=$("<div>").addClass("d-flex flex-row").attr("id","heading");
   
-  // Append the modal to the body of the document
-  $("#window-container").append(modalHtml);
+  if (cardData.title) {
+    card.append(`
+      <div class="flex-grow-2">
+        <h5>${cardData.title}</h5>
+      </div>
+    `)
 
-  // The close buttons on the modals aren't working right now.  Maybe a problem with popper.js?  Either way, I just added it manually here.
-  $("#modal-"+stamp+" button[data-dismiss='modal']").click(function() {
-      $("#modal-"+stamp).modal("hide");
-    }
-  )
+    // Add event handler for clicking card to speak cardData.title
+    card.click(function() {
+      speak(cardData.title);
+    })
 
-  // Attach a click event handler to the save button.  function also closes the modal
-  $("#saveImgBtn-"+stamp).click({stamp:stamp},saveNewImg);
+  }
+  if (cardData.src) {
+    card.append(`
+      <div class="flex-grow-1">
+        <img class ="img-deploy-heading"src=${cardData.src}>
+      </div>
+    `)
+  }
+
+  return card
 }
-
-function newCard() {
-  // Add a new blank card into the localstorage pageData
-  // Use displayCard and attachModal to update the html
-
-  let stamp = new Date().getTime();
-  let cardData = {
-    show: true,
-    stamp: stamp,
-    title: '',
-    src: ''
-  };
-}
-
 
 // **** functions for saving and getting from local storage ****
 
@@ -147,6 +131,12 @@ function setPageData(object) {
   localStorage.setItem(stamp,JSON.stringify(object));
 }
 
+function getPageTitle() {
+  // from local storage, get the title of a specific card
+  const pageData = getPageData();
+  return pageData.title;
+}
+
 function getCardTitle(stamp) {
   // from local storage, get the title of a specific card
   const pageData = getPageData();
@@ -172,17 +162,7 @@ function setImgSrc(stamp,src) {
   setPageData(pageData);
 }
 
-
-function saveNewImg(event) {
-  // get new img src from user input
-  // **TODO** How are we getting the new image's src?
-  // this also closes the modal
-
-  let src = "./assets/images/img-sample.png";
-  
-  // set new img src in local storage
-  setImgSrc(event.stamp,src);
-  
-  // close the modal
-  $("#modal-"+event.stamp).modal("hide");
+function speak(term) {
+  let utterance = new SpeechSynthesisUtterance(term);
+  speechSynthesis.speak(utterance);
 }

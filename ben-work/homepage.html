@@ -16,7 +16,7 @@
       <div class="col-2 border d-flex align-items-center">
 
         <div class="h-50 w-100 btn-group-vertical d-flex flex-column" role="group">
-          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="newPage()"><h4>New</h4><img class="img-btn" src="./assets/symbols/u1F4C4-pagefacingup.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="newBlankPage()"><h4>New</h4><img class="img-btn" src="./assets/symbols/u1F4C4-pagefacingup.svg"></div>
           <div role="button"  type="button" class="btn btn-lg btn-success disabled">New from Template</div>
         </div>
 
@@ -29,13 +29,10 @@
               <h5 class="card-title">
                 Sample
               </h5>
-              <div class="btn-group w-100" role="group">
-                <button class="btn btn-success disabled"><img src="./assets/symbols/u25B6-blackrightpointingarrow.svg" class="btn-symbol"></button>
-                <button class="btn btn-primary" onclick="newPage()"><img src="./assets/symbols/u270F-pencil.svg" class="btn-symbol"></button>
-              </div>
+
             </div>
           </div>
-          <div class="card page-card">
+          <div class="card page-card" id="card-yesno">
             <div role="image" class="card-img-top">
               <img class="sub-image" src="./assets/symbols/u2714-heavycheckmark.svg">
               <img class="sub-image" src="./assets/symbols/u1F5D9-cancellationx.svg">
@@ -45,8 +42,9 @@
                 Yes/No
               </h5>
               <div class="btn-group w-100" role="group">
-                <a href="./deploy/yesno.html" class="btn btn-success"><img src="./assets/symbols/u25B6-blackrightpointingarrow.svg" class="btn-symbol"></a>
-                <button class="btn btn-primary" onclick="newYesNo()"><img src="./assets/symbols/u270F-pencil.svg" class="btn-symbol"></button>
+                <a href="./deploy.html?page=yesno" class="btn btn-success"><img src="./assets/symbols/u25B6-blackrightpointingarrow.svg" class="btn-symbol"></a>
+                <button class="btn btn-primary disabled"><img src="./assets/symbols/u270F-pencil.svg" class="btn-symbol"></button>
+                <button class="btn btn-warning" onclick="newYesNo()"><img src="./assets/symbols/u1F4CB-clipboard.svg" class="btn-symbol"></button>
               </div>
             </div>
           </div>
