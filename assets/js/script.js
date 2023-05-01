@@ -36,7 +36,7 @@ window.onload = function() {
     const state = JSON.parse(localStorage.getItem('state'));
     if (state) {
         $('#space').html(state.space);
-        $('.dropdown-menu').html(state.dropdown);
+        $('#pick-options').html(state.pickoptions);
     }
     initDragElement();
     initResizeElement();
@@ -181,7 +181,7 @@ function deleteFromDropdown(term) {
 function saveState() {
     const state = {
       space: $('#space').html(),
-      dropdown: $('.dropdown-menu').html()
+      pickoptions: $('#pick-options').html()
     };
     localStorage.setItem('state', JSON.stringify(state));
   }
@@ -234,8 +234,8 @@ function fetchPicture(term) {
             </div>
         </div>`);
 
-        console.log($('.dropdown-menu').children);
-        $('.dropdown-menu').append(`<li id="dropdown-${term}" class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
+        console.log($('#pick-options'));
+        $('#pick-options').append(`<li id="dropdown-${term}" class="m-1"><a class="dropdown-item" href="#">${term.toUpperCase()}</a></li>`);
         /* Good time to save to localStorage HTML for the elements being created. */
         initDragElement();
         initResizeElement();
