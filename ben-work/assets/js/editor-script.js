@@ -204,7 +204,7 @@ function attachModal(stamp) {
     <div class="modal fade" id="modal-${stamp}" data-stamp="${stamp}" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header flex-wrap">
+          <div class="modal-header flex-wrap sticky-top">
             <h4 class="modal-title">Add Image</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -214,7 +214,7 @@ function attachModal(stamp) {
             <input type="text" class="form-control" id="search-input-${stamp}" data-stamp="${stamp}" placeholder="search">
             </form>
           </div>
-          <div id="modal-body-${stamp}" class="modal-body" data-stamp="${stamp}">
+          <div id="modal-body-${stamp}" class="modal-body overflow-auto" data-stamp="${stamp}">
 
           </div>
           <div class="modal-footer">
@@ -227,7 +227,7 @@ function attachModal(stamp) {
   `;
   
   // Append the modal to the body of the document
-  $("body").append(modalHtml);
+  $("#window-container").append(modalHtml);
 
   // attach submit event handler
   $("#modal-form-"+stamp).submit(showSearchResults);
@@ -246,6 +246,8 @@ function setSaveBtnData(event) {
   // Add the newImg's src to the modal save button as its data-src attribute
   // (Note: this does not change the html, just the data set with jquery)
 
+  console.log(event.detail);
+
   let newImg = $(event.target);
   let src = newImg.attr("src");
   let stamp = newImg.data("stamp");
@@ -255,20 +257,26 @@ function setSaveBtnData(event) {
   newImg.addClass('active');
 
   // Saving both the html "data-src" attribute and the jquery data set.
-  $("#saveImgBtn-"+stamp).attr("data-src",src);
-  $("#saveImgBtn-"+stamp).data("src",src);
+  const saveImgBtn = $("#saveImgBtn-"+stamp)
+  saveImgBtn.attr("data-src",src);
+  saveImgBtn.data("src",src);
+
+  // If the image was double clicked, trigger the save button to click.
+  if (event.detail > 1) {
+    saveImgBtn.click();
+  }
 
 }
 
 function saveNewImg(event) {
-  // $(event.target) is the save button
+  // $(event.target) is the save button, or maybe the new image itself if it is double clicked if I can ever get that to work.
   // get new img src from user input
   // this also closes the modal
 
-  let saveBtn = $(event.target);
-  let src = saveBtn.data("src");
+  let btn = $(event.target);
+  let src = btn.data("src");
   console.log(src)
-  let stamp = saveBtn.data("stamp");
+  let stamp = btn.data("stamp");
   
   // set new img src in local storage
 

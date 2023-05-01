@@ -10,11 +10,6 @@
   height:fit-content;
 }
 
-#window-container {
-  overflow-clip-margin: content-box;
-  overflow: clip;
-}
-
 .card-image {
   max-height: 100%;
   width: auto;
@@ -80,10 +75,6 @@
 
 #space {
   overflow-clip-margin: 0px;
-}
-
-#window-container {
-  max-height: 100%;
 }
 
 .page-card img {
