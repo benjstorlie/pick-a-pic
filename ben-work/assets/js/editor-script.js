@@ -261,17 +261,20 @@ function setSaveBtnData(event) {
 }
 
 function saveNewImg(event) {
-  // $(this) is the save button
+  // $(event.target) is the save button
   // get new img src from user input
   // this also closes the modal
 
   let saveBtn = $(event.target);
   let src = saveBtn.data("src");
+  console.log(src)
   let stamp = saveBtn.data("stamp");
   
   // set new img src in local storage
+
   setImgSrc(stamp,src);
   console.log(stamp+": "+src)
+
   
   // close the modal
   $("#modal-"+stamp).modal("hide");
@@ -472,13 +475,21 @@ function setHeadingTitle(titleString) {
 function getImgSrc(stamp) {
   // from local storage, get the img src of a specific card
   const pageData = getPageData();
-  return pageData.cards[stamp].src;
+  if (stamp=="heading") {
+    pageData.heading.src;
+  } else {
+    return pageData.cards[stamp].src;
+  }
 }
 
 function setImgSrc(stamp,src) {
   // from local storage, get the img src of a specific card
   let pageData = getPageData();
-  pageData.cards[stamp].src = src;
+  if (stamp=="heading") {
+    pageData.heading.src = src;
+  } else {
+    pageData.cards[stamp].src = src;
+  }
   setPageData(pageData);
 }
 
