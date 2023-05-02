@@ -201,7 +201,6 @@ function saveState() {
   saveState();
   deleteFromDropdown(divtodelete)
 }
-   
   
 function fetchPicture(term) {
     console.log(term);

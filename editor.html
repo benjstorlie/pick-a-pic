@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+  <div id="window-container" class="vw-100 vh-100 container-fluid d-flex flex-column">
+    <div id="page-title-area" class="row">
+      <div  class="col-12">
+        <form id="page-title-form">
+          <input type="text" class="form-control" placeholder="add page title" id="page-title-input">
+        </form>
+      </div>
+    </div>
+    <div class="row flex-grow-1">
+      <div class="col-2 d-flex flex-column justify-content-center bg-dark border"> <!-- Menu goes here -->
+        <div class="h-25 w-100 btn-group-vertical d-flex flex-column" role="group">
+          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="gotoHomePage()"><img class="btn-symbol" src="./assets/symbols/u1F519-backwithleftwardsarrow.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-success"><img class="btn-symbol" src="./assets/symbols/u1F4BE-floppydisk2.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-danger"><img class="btn-symbol" src="./assets/symbols/u1F5D1-wastebasket.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-info" onclick="deploy()"><img class="btn-symbol" src="./assets/symbols/u25B6-blackrightpointingarrow.svg"></div>
+          <div role="button" type="button" class="btn btn-lg btn-warning btn-block" onclick="newCard()"><img src="./assets/symbols/u2795-heavyplussign.svg" class="btn-symbol"></div>
+        </div>
+      </div>
+      <div id="editor" class="col-10 d-flex flex-column">
+         <!-- Editor goes here -->
+
+        <div id="heading-area"> <!-- Either heading-card editor, or add heading button -->
+          
+        </div>
+        <div id="space" class="card-deck d-flex flex-row flex-grow-1 bg-dark p-1">
+          <!-- Somehow accommodate for variable numbers of cards -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous">
+  </script>
+  
+  <script src="./assets/js/editor-script.js"></script>
+</body>
+
+</html>
