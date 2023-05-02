@@ -1,3 +1,28 @@
+
+/* The following is copied from the style.css document from the homepage for the Firefox Emoji site http://mozilla.github.io/fxemoji/dist/FirefoxEmoji/index.html */
+@font-face {
+  font-family: "FirefoxEmoji";
+  src: url('http://mozilla.github.io/fxemoji/dist/FirefoxEmoji/FirefoxEmoji.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.btn-symbol {
+  font-family: "FirefoxEmoji"; /* This will apply the FirefoxEmoji font to the element */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5em;
+  line-height: 1em;
+  /* The following is for in case .btn-symbol is an <img> */
+  height: 1em;  /* This will make the img height be the font-size of its parent element */
+  display: inline-block;
+  vertical-align: middle; /* This will vertically center the element within the button */
+}
+
+.btn-lg .btn-symbol {
+  font-size: 3em;
+}
+
 .h-10 {
   height: 10%;
 }
@@ -81,22 +106,6 @@
 .sub-image {
   display: inline;
   width: 48%;
-}
-
-.btn-symbol {
-  height: 30px;
-  max-height: 30px;
-}
-
-.btn-lg .btn-symbol {
-  height: 50px;
-  max-height: 50px;
-}
-
-.btn-speech .btn-symbol,
-.btn-sm .btn-symbol {
-  height: 20px;
-  max-height: 20px;
 }
 
 .card-left-sider {
