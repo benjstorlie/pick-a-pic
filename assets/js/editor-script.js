@@ -193,6 +193,7 @@ function headingButton(show=true) {
   const button = $("<button>").text("Add heading or question!").addClass("btn btn-warning btn-lg").click(showHeading).attr("id","heading-btn");
   if (show) {
     button.addClass("d-none");
+    ("#heading-area").addClass("small");
   }
   return button;
 }
@@ -429,6 +430,7 @@ function hideHeading() {
   setPageData(pageData);
 
   $("#heading-btn").removeClass("d-none");
+  $("#heading-area").addClass("small");
   $("#heading").addClass("d-none");
   $("#heading").removeClass("d-flex");
   
@@ -440,6 +442,7 @@ function showHeading() {
   setPageData(pageData);
 
   $("#heading").addClass("d-flex");
+  $("#heading-area").removeClass("small");
   $("#heading").removeClass("d-none");
   $("#heading-btn").addClass("d-none");
 }

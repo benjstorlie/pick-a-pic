@@ -53,7 +53,7 @@ function addPageCard(pageData) {
   const pageCard = $("<div>").addClass("card page-card m-1 main-card").attr("data-stamp",pageData.stamp)
     .html(`
     <div style="display: flex; align-self: center; text-align: center; height: 20vh; width: 28vw; max-width: fit-content;">
-      <img class="img-page-card img-div" style="height: 100%; width: 100%;">
+      <img class="img-page-card card-img-top" style="height: 100%; width: 100%;">
     </div>
       <div class="card-footer" style="text-align: center;">
         <h5 class="card-title" style="font-size: 2.5vw;">
@@ -64,7 +64,7 @@ function addPageCard(pageData) {
   // Does the image still want the bootstrap class= "card-img-top"?
 
   // This gets an image src for the page-card using its cards' images
-  pageCard.find(".img-page-card").css("background-image","url('"+ pageCardImgSrc(pageData)+"')");
+  pageCard.find(".img-page-card").attr("src",pageCardImgSrc(pageData));
   
   $("#pages-list").append(pageCard);
 }
