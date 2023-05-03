@@ -12,46 +12,45 @@
 </head>
 <body>
   <div id="window-container" class="vw-100 vh-100 container-fluid" >
-    <div class="row h-100 bg-dark" style="display: flex; flex-wrap: nowrap;">
+    <div class="row h-100 bg-dark whole-lr-container">
       <!-- put .border class back, orange is temporary to understand what I'm manipulating at the moment -->
-      <div class="col-2 d-flex align-items-center" style="width: fit-content; border: orange solid 4px;">
+      <div class="col-2 d-flex align-items-center left-container">
 
-        <div class="btn-group-vertical d-flex flex-column" role="group" style="display: flex; justify-content: center; align-items: center; height: 50vh; width: fit-content; padding: 6px; border: pink solid 5px;">
-          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="newBlankPage()" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 50%; width: 20vw; border: yellow solid 4px;">
+        <div class="btn-group-vertical d-flex flex-column nav-container" role="group">
+          <div role="button" type="button" class="btn btn-lg btn-primary nav-home-half" onclick="newBlankPage()">
             <h4 style="font-size: 3vw;">New</h4>
             <i class="h2 btn-symbol" role="icon">&#x1F4C4;</i>
           </div>
-          <div role="button" type="button" class="btn btn-lg btn-success disabled" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 50%; width: 20vw; max-height: 50vh; border: yellow solid 4px;">
+          <div role="button" type="button" class="btn btn-lg btn-success disabled nav-home-half">
             <h4 style="font-size: 3vw;">New from Template</h4>
           </div>
         </div>
 
       </div>
       
-      <div class="col" style="display: flex; flex-wrap: wrap; width: fit-content; border: red solid 4px; overflow: scroll;">
+      <div class="col right-container">
         <!-- deleted .align-items-start class -->
         <div id="pages-list" class="card-deck h-100 w-100 d-flex flex-wrap" style="display: flex; justify-content: space-around; align-items: center;">
-          <div class="card page-card m-1" id="card-sample" style="border: grey solid 4px; max-width: 240px; min-width: 240px;">
+          <div class="card page-card m-1 main-card" id="card-sample">
             <!-- deleted w-100 class to resize width -->
-            <div style="display: flex; align-self: center; text-align: center; border: blue solid 4px; height: 20vh; width: 28vw; max-width: fit-content;">
-              <img class="card-img-top" src="./assets/images/img-sample.png" style="height: 100%; width: 100%; border: pink solid 4px;">
+            <div class="main-img-container">
+              <img class="card-img-top img-container" src="./assets/images/img-sample.png" style="height: 100%; width: 100%;">
             </div>
-            <div class="card-footer" style="text-align: center; border: purple solid 4px;">
-              <h5 class="card-title" style="font-size: 2.5vw; border: green solid;">
-
+            <div class="card-footer footer-align">
+              <h5 class="card-title card-head-fs">
                 Sample
               </h5>
 
             </div>
           </div>
-          <div class="card page-card m-1" id="card-yesno" data-stamp="yesno" style="text-align: center; border: grey solid 4px; max-width: 240px; min-width: 240px;">
-            <div role="image" class="card-img-top" style="display: flex; align-self: center; text-align: center; border: blue solid 4px; height: 20vh; width: 28vw; max-width: fit-content;">
-              <img class="sub-image" src="https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u2714-heavycheckmark.svg" style="height: 100%; width: 50%; border: pink solid 4px;">
-              <img class="sub-image" src="https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u1F5D9-cancellationx.svg" style="height: 100%; width: 50%; border: pink solid 4px;">
-
+          <div class="card page-card m-1 main-card" id="card-yesno" data-stamp="yesno">
+            <div role="image" class="card-img-top main-img-container">
+              <!-- for some reason these <img> did not work properly when I tried making a class with it's <style>, so I just left the <style> with its parameters here -->
+              <img class="sub-image" src="https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u2714-heavycheckmark.svg" style="height: 100%; width: 50%;">
+              <img class="sub-image" src="https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u1F5D9-cancellationx.svg" style="height: 100%; width: 50%;">
             </div>
-            <div class="card-footer" style="text-align: center; border: purple solid 4px;">
-              <h5 class="card-title" style="font-size: 2.5vw; border: green solid;">
+            <div class="card-footer footer-align">
+              <h5 class="card-title card-head-fs">
                 Yes/No
               </h5>
             </div>

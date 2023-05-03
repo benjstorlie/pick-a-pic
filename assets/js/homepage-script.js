@@ -52,9 +52,11 @@ function addPageCard(pageData) {
   console.log(pageData.stamp);
   const pageCard = $("<div>").addClass("card page-card m-1 main-card").attr("data-stamp",pageData.stamp)
     .html(`
-      <div class="img-page-card img-div" style="height: 100%; width: 100%;isplay: flex; align-self: center; text-align: center; border: blue solid 4px; height: 20vh; width: 28vw; max-width: fit-content;">
-      <div class="card-footer" style="text-align: center; border: purple solid 4px;">
-        <h5 class="card-title" style="font-size: 2.5vw; border: green solid;">
+    <div style="display: flex; align-self: center; text-align: center; height: 20vh; width: 28vw; max-width: fit-content;">
+      <img class="img-page-card img-div" style="height: 100%; width: 100%;">
+    </div>
+      <div class="card-footer" style="text-align: center;">
+        <h5 class="card-title" style="font-size: 2.5vw;">
           ${title}
         </h5>
       </div>
