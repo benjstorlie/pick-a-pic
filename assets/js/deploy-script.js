@@ -50,7 +50,7 @@ function displayCard(cardData) {
 
     // Add event handler for clicking card to speak cardData.title
     card.click(function() {
-      speak(cardData.title);
+      speakAndHighlight(cardData.title, card);
     })
 
   }
@@ -79,7 +79,7 @@ function displayHeading(cardData) {
 
     // Add event handler for clicking card to speak cardData.title
     card.click(function() {
-      speak(cardData.title);
+      speakAndHighlight(cardData.title, card);
     })
 
   }
@@ -162,7 +162,11 @@ function setImgSrc(stamp,src) {
   setPageData(pageData);
 }
 
-function speak(term) {
+function speakAndHighlight(term, highlightElement) {
   let utterance = new SpeechSynthesisUtterance(term);
+  highlightElement.toggleClass('active-modal');
+  utterance.addEventListener("end", (event) => {
+    highlightElement.toggleClass('active-modal');
+  });  
   speechSynthesis.speak(utterance);
 }

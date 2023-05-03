@@ -96,24 +96,8 @@ function displayCard(cardData={}) {
   // Add speech button
   card.find(".btn-speech").click(function() {
     speak($("#input-"+stamp).val() );
-    let thisCard = $(this).closest('.card');
-    thisCard.toggleClass('active-modal');
-    setTimeout(
-      function() 
-      {
-        thisCard.toggleClass('active-modal'); // or var clickedBtnID = this.id
-      }, 2500);
   });
-  // card.find(".btn-speech").click(function() {
-  //   speak($("#input-heading").val() );
-  //   $("#heading").closest('.card').toggleClass('active-modal');
-  //   setTimeout(
-  //     function() 
-  //     {
-  //       $("#heading").closest('.card').toggleClass('active-modal'); // or var clickedBtnID = this.id
-  //     }, 2500);
-    
-  // });
+
   let image=card.find(".img-card");
   image.click(function() {
     preShowModal(stamp);
@@ -175,13 +159,6 @@ function displayHeading(cardData) {
   // This also executes whenever you submit the form?  I think that's fine, though.
   card.find(".btn-speech").click(function() {
     speak($("#input-heading").val() );
-    $("#heading").closest('.card').toggleClass('active-modal');
-    setTimeout(
-      function() 
-      {
-        $("#heading").closest('.card').toggleClass('active-modal'); // or var clickedBtnID = this.id
-      }, 2500);
-    
   });
 
   // Clicking the image brings up the modal where you can search and choose an image.
