@@ -24,7 +24,7 @@
     <div class="row flex-grow-1 bg-dark whole-lr-container">
       <div class="col-2 d-flex flex-column justify-content-center bg-dark border left-container"> <!-- Menu goes here -->
         <!-- deleted h-25 class -->
-        <div class="w-100 btn-group-vertical d-flex flex-column nav-container" role="group">
+        <div class="btn-group-vertical d-flex flex-column nav-container" role="group">
           <div role="button" type="button" class="btn btn-lg btn-primary nav-editor-fifth" onclick="gotoHomePage()">
             <i class="btn-symbol " role="icon">&#x1F519;</i>
            </div>
@@ -42,14 +42,20 @@
           </div>
         </div>
       </div>
-      <div id="editor" class="col-10 d-flex flex-column bg-dark right-container">
+      
+      <div id="editor" class="col d-flex flex-column bg-dark right-container">
          <!-- Editor goes here -->
 
-        <div id="heading-area"> <!-- Either heading-card editor, or add heading button -->
+        <div id="heading-area" class="heading-editor"> <!-- Either heading-card editor, or add heading button -->
           
         </div>
-        <div id="space" class="card-deck d-flex flex-row flex-grow-1 bg-dark p-1" >
-          <!-- Somehow accommodate for variable numbers of cards -->
+        <div class="col" style="display: flex; justify-content: space-around; height: 100%; width: fit-content;">
+          
+          <div class="r-editor-container">
+            <div id="space" class="card-deck h-100 w-100 d-flex flex-wrap" style="display: flex; justify-content: space-around; align-items: center;">
+          </div>
+        </div>
+            <!-- Somehow accommodate for variable numbers of cards -->
         </div>
 
       </div>
