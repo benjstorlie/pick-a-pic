@@ -1,3 +1,28 @@
+
+/* The following is copied from the style.css document from the homepage for the Firefox Emoji site http://mozilla.github.io/fxemoji/dist/FirefoxEmoji/index.html */
+@font-face {
+  font-family: "FirefoxEmoji";
+  src: url('http://mozilla.github.io/fxemoji/dist/FirefoxEmoji/FirefoxEmoji.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.btn-symbol {
+  font-family: "FirefoxEmoji"; /* This will apply the FirefoxEmoji font to the element */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5em;
+  line-height: 1em;
+  /* The following is for in case .btn-symbol is an <img> */
+  height: 1em;  /* This will make the img height be the font-size of its parent element */
+  display: inline-block;
+  vertical-align: middle; /* This will vertically center the element within the button */
+}
+
+.btn-lg .btn-symbol {
+  font-size: 3em;
+}
+
 .h-10 {
   height: 10%;
 }
@@ -7,7 +32,7 @@
 }
 
 #page-title-area {
-  height:fit-content;
+  height: fit-content;
 }
 
 .card-image {
@@ -25,13 +50,25 @@
   flex: 1 0 0%;
 }
 
+.img-deploy-card{
+  height:100px
+}
+
+.img-div {
+  /* background-image: url('path/to/image.jpg'); */
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-clip: padding-box;
+}
+
 .btn-speech {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
 .img-search-results {
-  width:200px;
+  width: 200px;
 }
 
 .img-search-results.active {
@@ -62,7 +99,7 @@
 }
 
 #heading .close,
-.modal .close{
+.modal .close {
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -83,28 +120,12 @@
   width: 48%;
 }
 
-.btn-symbol {
-  height: 30px;
-  max-height: 30px;
-}
-
-.btn-lg .btn-symbol {
-  height: 50px;
-  max-height: 50px;
-}
-
-.btn-speech .btn-symbol,
-.btn-sm .btn-symbol {
-  height: 20px;
-  max-height: 20px;
-}
-
 .card-left-sider {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
   margin-right: 0;
   color: var(--bs-card-cap-color);
   background-color: var(--bs-card-cap-bg);
-  border-right: var(--bs-card-border-width) solid var(--bs-card-border-color);  
+  border-right: var(--bs-card-border-width) solid var(--bs-card-border-color);
   flex: 3 0 0%;
 }
 
@@ -122,6 +143,7 @@
   max-height: 150px;
 }
 
+
 /* added classes, just putting here just in case we don't need these -byron */
 .main-card {
   text-align: center; 
@@ -133,3 +155,21 @@
 /* .img-page-card {
 
 } */
+
+.active-modal {
+  animation: myAnim 1s ease 0s 1 normal forwards;
+  background-color: blue;
+}
+
+@keyframes myAnim {
+  0% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

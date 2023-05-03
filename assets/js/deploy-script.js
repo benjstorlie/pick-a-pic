@@ -1,7 +1,7 @@
 const space = $("#space");
 const headingArea = $("#heading-area");
 
-const yesnoPageData = JSON.parse(`{"stamp":"yesno","title":"Yes/No","heading":{"show":false,"stamp":"heading","title":"","src":""},"cardOrder":["yes","no"],"cards":{"yes":{"stamp":"yes","show":true,"title":"yes","src":"./assets/symbols/u2714-heavycheckmark.svg"},"no":{"stamp":"no","show":true,"title":"no","src":"./assets/symbols/u1F5D9-cancellationx.svg"}}}`);
+const yesnoPageData = JSON.parse(`{"stamp":"yesno","title":"Yes/No","heading":{"show":false,"stamp":"heading","title":"","src":""},"cardOrder":["yes","no"],"cards":{"yes":{"stamp":"yes","show":true,"title":"yes","src":"https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u2714-heavycheckmark.svg"},"no":{"stamp":"no","show":true,"title":"no","src":"https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u1F5D9-cancellationx.svg"}}}`);
 
 window.onload = function() {
 
@@ -50,13 +50,13 @@ function displayCard(cardData) {
 
     // Add event handler for clicking card to speak cardData.title
     card.click(function() {
-      speak(cardData.title);
+      speakAndHighlight(cardData.title, card);
     })
 
   }
   if (cardData.src) {
     card.append(`
-      <img class="card-img-btm p-1 img-deploy-card" src=${cardData.src}>
+      <div class="card-img-btm p-1 img-deploy-card img-div" style="background-image:url('${cardData.src}')">
     `)
   }
 
@@ -79,13 +79,13 @@ function displayHeading(cardData) {
 
     // Add event handler for clicking card to speak cardData.title
     card.click(function() {
-      speak(cardData.title);
+      speakAndHighlight(cardData.title, card);
     })
 
   }
   if (cardData.src) {
     card.append(`
-        <img class ="img-deploy-heading" src=${cardData.src}>
+      <div class="card-img-btm p-1 img-deploy-card img-div" style="background-image:url('${cardData.src}')">
     `)
   }
 
@@ -162,7 +162,19 @@ function setImgSrc(stamp,src) {
   setPageData(pageData);
 }
 
-function speak(term) {
+function speakAndHighlight(term, highlightElement) {
   let utterance = new SpeechSynthesisUtterance(term);
+  highlightElement.toggleClass('active-modal');
+  utterance.addEventListener("end", (event) => {
+    highlightElement.toggleClass('active-modal');
+  });  
   speechSynthesis.speak(utterance);
 }
+
+function emoji(unicodeCode,attributes='') {
+  // returns the html text for an emoji in an <i> tag with class .btn-symbol
+  // include more attributes with the optional second parameter
+
+
+    return `<i class="btn-symbol" role='icon' `+attributes+`>&#x`+unicodeCode+`;</i>`
+} 
