@@ -121,3 +121,15 @@
   object-fit: contain;
   max-height: 150px;
 }
+
+/* added classes, just putting here just in case we don't need these -byron */
+.main-card {
+  text-align: center; 
+  border: grey solid 4px; 
+  max-width: 240px;
+  min-width: 240px;
+}
+
+/* .img-page-card {
+
+} */

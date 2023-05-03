@@ -50,11 +50,13 @@ function addPageCard(pageData) {
     title=pageData.title;
   }
   console.log(pageData.stamp);
-  const pageCard = $("<div>").addClass("card page-card m-1").attr("data-stamp",pageData.stamp)
+  const pageCard = $("<div>").addClass("card page-card m-1 main-card").attr("data-stamp",pageData.stamp)
     .html(`
-      <img class="card-img-top img-page-card">
-      <div class="card-footer">
-        <h5 class="card-title">
+      <div style="display: flex; align-self: center; text-align: center; border: blue solid 4px; height: 20vh; width: 28vw; max-width: fit-content;">
+        <img class="card-img-top img-page-card" style="height: 100%; width: 100%; border: pink solid 4px;">
+      </div>
+      <div class="card-footer" style="text-align: center; border: purple solid 4px;">
+        <h5 class="card-title" style="font-size: 2.5vw; border: green solid;">
           ${title}
         </h5>
       </div>

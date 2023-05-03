@@ -11,34 +11,45 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-  <div id="window-container" class="vw-100 vh-100 container-fluid">
-    <div class="row h-100 bg-dark">
-      <div class="col-2 border d-flex align-items-center">
+  <div id="window-container" class="vw-100 vh-100 container-fluid" >
+    <div class="row h-100 bg-dark" style="display: flex; flex-wrap: nowrap;">
+      <!-- put .border class back, orange is temporary to understand what I'm manipulating at the moment -->
+      <div class="col-2 d-flex align-items-center" style="width: fit-content; border: orange solid 4px;">
 
-        <div class="h-50 w-100 btn-group-vertical d-flex flex-column" role="group">
-          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="newBlankPage()"><h4>New</h4><img class="img-btn" src="./assets/symbols/u1F4C4-pagefacingup.svg"></div>
-          <div role="button"  type="button" class="btn btn-lg btn-success disabled">New from Template</div>
+        <div class="btn-group-vertical d-flex flex-column" role="group" style="display: flex; justify-content: center; align-items: center; height: 50vh; width: fit-content; padding: 6px; border: pink solid 5px;">
+          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="newBlankPage()" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 50%; width: 20vw; border: yellow solid 4px;">
+            <h4 style="font-size: 3vw;">New</h4>
+            <img src="./assets/symbols/u1F4C4-pagefacingup.svg" style="height:10vh; width: 10vw;">
+          </div>
+          <div role="button" type="button" class="btn btn-lg btn-success disabled" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 50%; width: 20vw; max-height: 50vh; border: yellow solid 4px;">
+            <h4 style="font-size: 3vw;">New from Template</h4>
+          </div>
         </div>
 
       </div>
-      <div class="col">
-        <div id="pages-list" class="card-deck h-100 w-100 d-flex flex-wrap align-items-start">
-          <div class="card page-card m-1" id="card-sample">
-            <img class="card-img-top w-100" src="./assets/images/img-sample.png">
-            <div class="card-footer">
-              <h5 class="card-title">
+      
+      <div class="col" style="display: flex; flex-wrap: wrap; width: fit-content; border: red solid 4px; overflow: scroll;">
+        <!-- deleted .align-items-start class -->
+        <div id="pages-list" class="card-deck h-100 w-100 d-flex flex-wrap" style="display: flex; justify-content: space-around; align-items: center;">
+          <div class="card page-card m-1" id="card-sample" style="border: grey solid 4px; max-width: 240px; min-width: 240px;">
+            <!-- deleted w-100 class to resize width -->
+            <div style="display: flex; align-self: center; text-align: center; border: blue solid 4px; height: 20vh; width: 28vw; max-width: fit-content;">
+              <img class="card-img-top" src="./assets/images/img-sample.png" style="height: 100%; width: 100%; border: pink solid 4px;">
+            </div>
+            <div class="card-footer" style="text-align: center; border: purple solid 4px;">
+              <h5 class="card-title" style="font-size: 2.5vw; border: green solid;">
                 Sample
               </h5>
 
             </div>
           </div>
-          <div class="card page-card m-1" id="card-yesno" data-stamp="yesno">
-            <div role="image" class="card-img-top">
-              <img class="sub-image" src="./assets/symbols/u2714-heavycheckmark.svg">
-              <img class="sub-image" src="./assets/symbols/u1F5D9-cancellationx.svg">
+          <div class="card page-card m-1" id="card-yesno" data-stamp="yesno" style="text-align: center; border: grey solid 4px; max-width: 240px; min-width: 240px;">
+            <div role="image" class="card-img-top" style="display: flex; align-self: center; text-align: center; border: blue solid 4px; height: 20vh; width: 28vw; max-width: fit-content;">
+              <img class="sub-image" src="./assets/symbols/u2714-heavycheckmark.svg" style="height: 100%; width: 50%; border: pink solid 4px;">
+              <img class="sub-image" src="./assets/symbols/u1F5D9-cancellationx.svg" style="height: 100%; width: 50%; border: pink solid 4px;">
             </div>
-            <div class="card-footer">
-              <h5 class="card-title">
+            <div class="card-footer" style="text-align: center; border: purple solid 4px;">
+              <h5 class="card-title" style="font-size: 2.5vw; border: green solid;">
                 Yes/No
               </h5>
             </div>
