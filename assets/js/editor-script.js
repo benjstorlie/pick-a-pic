@@ -70,7 +70,7 @@ function displayCard(cardData={}) {
           <div class="input-group">
             <div class="input-group-prepend">
               <button class="btn btn-secondary btn-speech">
-                <img class="btn-symbol" src="./assets/symbols/u1F4AC-speechbubble.svg">
+                ${emoji("1F4AC")}
               </button>
             </div>
             <input type="text" class="form-control" placeholder="add title" id="input-${stamp}" data-stamp="${stamp}">
@@ -105,7 +105,7 @@ function displayCard(cardData={}) {
   });
 
   if (!cardData.src) {
-    image.attr("src", "./assets/symbols/u2795-heavyplussign.svg");
+    image.attr("src", "./assets/images/img-sample.png");
   } else {
     image.attr("src", cardData.src);
   }
@@ -132,7 +132,7 @@ function displayHeading(cardData) {
           <div class="input-group">
             <div class="input-group-prepend">
               <button class="btn btn-secondary btn-speech">
-                <img class="btn-symbol" src="./assets/symbols/u1F4AC-speechbubble.svg">
+                ${emoji("1F4AC")}
               </button>
             </div>
             <input type="text" class="form-control" placeholder="add heading or question!" id="input-heading">
@@ -167,9 +167,9 @@ function displayHeading(cardData) {
     $('#modal-heading').modal('show');
   });
 
-  // If an image wasn't already chosen, put a plus sign there.
+  // If an image wasn't already chosen, put a sample image there.
   if (!cardData.src) {
-    image.attr("src", "./assets/symbols/u2795-heavyplussign.svg");
+    image.attr("src", "./assets/images/img-sample.png");
   } else {
     image.attr("src", cardData.src);
   }
@@ -564,3 +564,11 @@ function newPage(currentPageStamp='') {
     return pageData;
   }
 }
+
+function emoji(unicodeCode,attributes='') {
+  // returns the html text for an emoji in an <i> tag with class .btn-symbol
+  // include more attributes with the optional second parameter
+
+
+    return `<i class="btn-symbol" role='icon' `+attributes+`>&#x`+unicodeCode+`;</i>`
+} 
