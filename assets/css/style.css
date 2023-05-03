@@ -68,7 +68,8 @@
 }
 
 .img-search-results {
-  width: 200px;
+  max-width: 250px;
+  max-height: 250px;
 }
 
 .img-search-results.active {
@@ -104,6 +105,16 @@
   right: 1rem;
   top: 1rem;
   z-index: 3;
+}
+
+.modal-body {
+  max-height: 600px; /* arbitrary size based on what probably looks good */
+  text-align: center;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: var(--bs-gray-100);
 }
 
 .page-card img {
