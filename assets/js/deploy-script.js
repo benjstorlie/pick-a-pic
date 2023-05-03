@@ -56,7 +56,7 @@ function displayCard(cardData) {
   }
   if (cardData.src) {
     card.append(`
-      <img class="card-img-btm p-1 img-deploy-card" src=${cardData.src}>
+      <div class="card-img-btm p-1 img-deploy-card img-div" style="background-image:url('${cardData.src}')">
     `)
   }
 
@@ -85,7 +85,7 @@ function displayHeading(cardData) {
   }
   if (cardData.src) {
     card.append(`
-        <img class ="img-deploy-heading" src=${cardData.src}>
+      <div class="card-img-btm p-1 img-deploy-card img-div" style="background-image:url('${cardData.src}')">
     `)
   }
 

@@ -52,7 +52,7 @@ function addPageCard(pageData) {
   console.log(pageData.stamp);
   const pageCard = $("<div>").addClass("card page-card m-1").attr("data-stamp",pageData.stamp)
     .html(`
-      <img class="card-img-top img-page-card">
+      <div class="card-img-top img-page-card img-div">
       <div class="card-footer">
         <h5 class="card-title">
           ${title}
@@ -61,7 +61,7 @@ function addPageCard(pageData) {
   `);
 
   // This gets an image src for the page-card using its cards' images
-  pageCard.find(".img-page-card").attr("src",pageCardImgSrc(pageData));
+  pageCard.find(".img-page-card").css("background-image","url('"+ pageCardImgSrc(pageData)+"')");
   
   $("#pages-list").append(pageCard);
 }

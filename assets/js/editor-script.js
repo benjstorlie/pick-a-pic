@@ -70,7 +70,7 @@ function displayCard(cardData={}) {
           <div class="input-group">
             <div class="input-group-prepend">
               <button class="btn btn-secondary btn-speech">
-                <img class="btn-symbol" src="./assets/symbols/u1F4AC-speechbubble.svg">
+                <div class= "img-div" "btn-symbol" src="./assets/symbols/u1F4AC-speechbubble.svg">
               </button>
             </div>
             <input type="text" class="form-control" placeholder="add title" id="input-${stamp}" data-stamp="${stamp}">
@@ -80,7 +80,7 @@ function displayCard(cardData={}) {
         <span aria-hidden="true">&times;</span>
       </button>
       </div>
-      <img id="img-${stamp}" data-stamp="${stamp}" role="button" class="btn img-card" data-toggle="modal" data-target="#modal-${stamp}">
+      <div id="img-${stamp}" data-stamp="${stamp}" role="button" class="btn img-card img-div" data-toggle="modal" data-target="#modal-${stamp}">
   `)
 
   if (cardData.title) {
@@ -105,9 +105,9 @@ function displayCard(cardData={}) {
   });
 
   if (!cardData.src) {
-    image.attr("src", "./assets/symbols/u2795-heavyplussign.svg");
+    image.css("background-image", "url ('./assets/symbols/u2795-heavyplussign.svg')");
   } else {
-    image.attr("src", cardData.src);
+    image.css("background-image","url('"+ cardData.src +"')");
   }
 
   const deleteButton = card.find("#delete-"+stamp);
@@ -139,7 +139,7 @@ function displayHeading(cardData) {
           </div>
         </form>
       </div>
-        <img id="img-heading" role="button" class="btn img-heading" data-toggle="modal" data-target="#modal-heading">
+        <div id="img-heading" role="button" class="btn img-heading img-div" data-toggle="modal" data-target="#modal-heading">
       <button id="delete-heading" type="button" class="close" aria-label="Delete">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -169,9 +169,9 @@ function displayHeading(cardData) {
 
   // If an image wasn't already chosen, put a plus sign there.
   if (!cardData.src) {
-    image.attr("src", "./assets/symbols/u2795-heavyplussign.svg");
+    image.css("background-image", "url ('./assets/symbols/u2795-heavyplussign.svg')");
   } else {
-    image.attr("src", cardData.src);
+    image.css("background-image","url('"+ cardData.src +"')");
   }
 
   const deleteButton = card.find("#delete-heading");
@@ -288,8 +288,7 @@ function saveNewImg(event) {
   $("#modal-"+stamp).modal("hide");
 
   // re-set the image in the card
-  $("#img-"+stamp).attr("src",src);
-  console.log($("#img-"+stamp).attr("src"));
+  $("#img-"+stamp).css("background-image","url('"+ src +"')");
 }
 
 function showSearchResults(event) {
