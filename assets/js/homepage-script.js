@@ -50,15 +50,16 @@ function addPageCard(pageData) {
     title=pageData.title;
   }
   console.log(pageData.stamp);
-  const pageCard = $("<div>").addClass("card page-card m-1").attr("data-stamp",pageData.stamp)
+  const pageCard = $("<div>").addClass("card page-card m-1 main-card").attr("data-stamp",pageData.stamp)
     .html(`
-      <div class="card-img-top img-page-card img-div">
-      <div class="card-footer">
-        <h5 class="card-title">
+      <div class="img-page-card img-div" style="height: 100%; width: 100%;isplay: flex; align-self: center; text-align: center; border: blue solid 4px; height: 20vh; width: 28vw; max-width: fit-content;">
+      <div class="card-footer" style="text-align: center; border: purple solid 4px;">
+        <h5 class="card-title" style="font-size: 2.5vw; border: green solid;">
           ${title}
         </h5>
       </div>
   `);
+  // Does the image still want the bootstrap class= "card-img-top"?
 
   // This gets an image src for the page-card using its cards' images
   pageCard.find(".img-page-card").css("background-image","url('"+ pageCardImgSrc(pageData)+"')");

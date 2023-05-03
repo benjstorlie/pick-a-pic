@@ -21,17 +21,28 @@
         </form>
       </div>
     </div>
-    <div class="row flex-grow-1">
-      <div class="col-2 d-flex flex-column justify-content-center bg-dark border"> <!-- Menu goes here -->
-        <div class="h-25 w-100 btn-group-vertical d-flex flex-column" role="group">
-          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="gotoHomePage()"><i class="btn-symbol" role="icon">&#x1F519;</i></div>
-          <div role="button" type="button" class="btn btn-lg btn-success"><i class="btn-symbol" role="icon">&#x1F4BE;</i></div>
-          <div role="button" type="button" class="btn btn-lg btn-danger"><i class="btn-symbol" role="icon">&#x1F5D1;</i></div>
-          <div role="button" type="button" class="btn btn-lg btn-info" onclick="deploy()"><i class="btn-symbol" role="icon">&#x25B6;</i></div>
-          <div role="button" type="button" class="btn btn-lg btn-warning btn-block" onclick="newCard()"><i class="btn-symbol" role="icon">&#x2795;</i></div>
+    <div class="row flex-grow-1" style="display: flex; flex-wrap: nowrap;">
+      <div class="col-2 d-flex flex-column justify-content-center bg-dark border" style="width: fit-content; border: orange solid 4px;"> <!-- Menu goes here -->
+        <!-- deleted h-25 class -->
+        <div class="w-100 btn-group-vertical d-flex flex-column" role="group" style="display: flex; justify-content: center; align-items: center; height: 50vh; width: fit-content; padding: 6px; border: pink solid 5px;">
+          <div role="button" type="button" class="btn btn-lg btn-primary" onclick="gotoHomePage()" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 20%; width: 20vw; border: yellow solid 4px;">
+            <i class="btn-symbol" role="icon">&#x1F519;</i>
+           </div>
+          <div role="button" type="button" class="btn btn-lg btn-success" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 20%; width: 20vw; border: yellow solid 4px;">
+            <i class="btn-symbol" role="icon">&#x1F4BE;</i>
+            </div>
+          <div role="button" type="button" class="btn btn-lg btn-danger" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 20%; width: 20vw; border: yellow solid 4px;" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 20%; width: 20vw; border: yellow solid 4px;">
+            <i class="btn-symbol" role="icon">&#x1F5D1;</i>
+          </div>
+          <div role="button" type="button" class="btn btn-lg btn-info" onclick="deploy()" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 20%; width: 20vw; border: yellow solid 4px;">
+            <i class="btn-symbol" role="icon">&#x25B6;</i>
+          </div>
+          <div role="button" type="button" class="btn btn-lg btn-warning btn-block" onclick="newCard()" style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 20%; width: 20vw; border: yellow solid 4px;">
+            <i class="btn-symbol" role="icon">&#x2795;</i>
+          </div>
         </div>
       </div>
-      <div id="editor" class="col-10 d-flex flex-column">
+      <div id="editor" class="col-10 d-flex flex-column" style="display: flex; flex-wrap: wrap; width: fit-content; border: red solid 4px; overflow: scroll;">
          <!-- Editor goes here -->
 
         <div id="heading-area"> <!-- Either heading-card editor, or add heading button -->
