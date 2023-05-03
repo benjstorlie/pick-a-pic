@@ -50,6 +50,18 @@
   flex: 1 0 0%;
 }
 
+.img-deploy-card{
+  height:100px
+}
+
+.img-div {
+  /* background-image: url('path/to/image.jpg'); */
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-clip: padding-box;
+}
+
 .btn-speech {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
