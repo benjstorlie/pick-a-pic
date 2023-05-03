@@ -105,10 +105,10 @@ function addFooterButtons() {
   
   let buttonGroup = $('<div>').addClass("btn-group w-100").attr("role","group");
 
-  let deployBtn = footerButton("btn-success btn-deploy","u25B6-blackrightpointingarrow",deployPage)
-  let editBtn = footerButton("btn-primary btn-edit","u270F-pencil",editPage);
-  let copyBtn = footerButton("btn-warning btn-copy","u1F4CB-clipboard",copyPage );
-  let deleteBtn = footerButton("btn-danger btn-delete", "u1F5D1-wasteBasket",deletePage);
+  let deployBtn = footerButton("btn-success btn-deploy","25B6",deployPage)
+  let editBtn = footerButton("btn-primary btn-edit","270F",editPage);
+  let copyBtn = footerButton("btn-warning btn-copy","1F4CB",copyPage );
+  let deleteBtn = footerButton("btn-danger btn-delete", "1F5D1",deletePage);
 
   buttonGroup.append(deployBtn).append(editBtn).append(copyBtn).append(deleteBtn);
 
@@ -117,11 +117,11 @@ function addFooterButtons() {
 
 // ** Footer button functions
 
-function footerButton(btnClass,symbolFileName,fun) {
+function footerButton(btnClass,unicodeCode,fun) {
   // return a jquery button with some features
   return $("<button>")
     .addClass("btn btn-sm "+btnClass)
-    .append("<img src='./assets/symbols/"+symbolFileName+".svg' class='btn-symbol'>")
+    .append(emoji(unicodeCode))
     .click(fun);
 }
 
@@ -188,7 +188,7 @@ function newPage(pageData=undefined) {
   window.location.assign("./editor.html?page="+stamp);
 }
 
-const yesnoPageData = JSON.parse(`{"stamp":"yesno","title":"Yes/No","heading":{"show":false,"stamp":"heading","title":"","src":""},"cardOrder":["yes","no"],"cards":{"yes":{"stamp":"yes","show":true,"title":"yes","src":"./assets/symbols/u2714-heavycheckmark.svg"},"no":{"stamp":"no","show":true,"title":"no","src":"./assets/symbols/u1F5D9-cancellationx.svg"}}}`);
+const yesnoPageData = JSON.parse(`{"stamp":"yesno","title":"Yes/No","heading":{"show":false,"stamp":"heading","title":"","src":""},"cardOrder":["yes","no"],"cards":{"yes":{"stamp":"yes","show":true,"title":"yes","src":"https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u2714-heavycheckmark.svg"},"no":{"stamp":"no","show":true,"title":"no","src":"https://raw.githubusercontent.com/mozilla/fxemoji/270af343bee346d8221f87806d2b1eee0438431a/svgs/FirefoxEmoji/u1F5D9-cancellationx.svg"}}}`);
 
 function newYesNo() {
   newPage(yesnoPageData);
@@ -198,3 +198,10 @@ function newBlankPage() {
   newPage();
 }
 
+function emoji(unicodeCode,attributes='') {
+  // returns the html text for an emoji in an <i> tag with class .btn-symbol
+  // include more attributes with the optional second parameter
+
+
+    return `<i class="btn-symbol" role='icon' `+attributes+`>&#x`+unicodeCode+`;</i>`
+} 
