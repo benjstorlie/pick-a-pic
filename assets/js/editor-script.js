@@ -63,24 +63,26 @@ function displayCard(cardData={}) {
 
   let stamp = cardData.stamp;
 
-  const card=$("<div>").addClass("card m-1").attr("id","card-"+stamp).attr("data-stamp",stamp);
+  const card=$("<div>").addClass("card m-1 card-edit").attr("id","card-"+stamp).attr("data-stamp",stamp);
   card.html(`
-      <div class="card-header d-flex flex-row">
-        <form id="form-${stamp}" data-stamp="${stamp}" class="flex-grow-1">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <button class="btn btn-secondary btn-speech">
-                ${emoji("1F4AC")}
-              </button>
-            </div>
-            <input type="text" class="form-control" placeholder="add title" id="input-${stamp}" data-stamp="${stamp}">
+    <div class="card-header d-flex flex-row">
+      <form id="form-${stamp}" data-stamp="${stamp}" class="flex-grow-1">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-secondary btn-speech">
+              ${emoji("1F4AC")}
+            </button>
           </div>
-        </form>
-        <button id="delete-${stamp}" data-stamp="${stamp}" type="button" class="close" aria-label="Delete">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      </div>
-      <button id="img-${stamp}" data-stamp="${stamp}" role="button" class="btn btn-outline-primary img-card img-div" data-toggle="modal" data-target="#modal-${stamp}">
+
+          <input type="text" class="form-control" placeholder="add title" id="input-${stamp}" data-stamp="${stamp}">
+        </div>
+      </form>
+      <button id="delete-${stamp}" data-stamp="${stamp}" type="button" class="close" aria-label="Delete">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <button id="img-${stamp}" data-stamp="${stamp}" role="button" class="btn btn-outline-primary img-card img-div" data-toggle="modal" data-target="#modal-${stamp}">
+
   `)
 
   if (cardData.title) {
