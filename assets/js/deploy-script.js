@@ -17,7 +17,8 @@ window.onload = function() {
     console.log(pageData.title);
   }
 
-  if (pageData.heading) {
+  if (!isBlankOrHidden(pageData.heading)) {
+    headingArea.addClass("d-flex").removeClass("d-none");
     headingArea.append(displayHeading(pageData.heading));
   }
 
@@ -28,6 +29,17 @@ window.onload = function() {
   }
 
 }
+
+function isBlankOrHidden(cardData) {
+  if (!cardData.show) {
+    return true
+  } else {
+    if (!cardData.title && !cardData.src) {
+      return true
+    } else {return false}
+  }
+}
+
 
 function gotoHomePage() {
   // include some kind of saving function, just in case?
