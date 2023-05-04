@@ -195,7 +195,6 @@ function headingButton(show=true) {
   const button = $("<button>").text("Add heading or question!").addClass("btn btn-warning btn-lg").click(showHeading).attr("id","heading-btn");
   if (show) {
     button.addClass("d-none");
-    ("#heading-area").addClass("small");
   }
   return button;
 }
