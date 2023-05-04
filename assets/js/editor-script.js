@@ -183,6 +183,7 @@ function displayHeading(cardData) {
   if (!cardData.show) {
     card.addClass("d-none");
     card.removeClass("d-flex");
+    headingArea.addClass("small");
   }
 
   return card
@@ -192,7 +193,7 @@ function headingButton(show=true) {
   // This button can be clicked to add a heading.  It removes class="d-none" from the heading already in the html, and updates pageData.heading.show.  Then it sets its own display to none.
   // The heading card will have a delete button to do the reverse.
 
-  const button = $("<button>").text("Add heading or question!").addClass("btn btn-warning btn-lg").click(showHeading).attr("id","heading-btn");
+  const button = $("<button>").text("Add heading or question!").addClass("btn btn-warning btn-lg w-100").click(showHeading).attr("id","heading-btn");
   if (show) {
     button.addClass("d-none");
   }
