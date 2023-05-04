@@ -86,8 +86,8 @@
   flex: 1 0 0%;
 }
 
-#space .card {
-  /* min-width: 30%; */
+.deploy-card-deck .card {
+  min-width: 200px;
 }
 
 .card-deck {
