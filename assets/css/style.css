@@ -115,6 +115,15 @@
   z-index: 3;
 }
 
+.modal-body {
+  max-height: 600px; /* Even if it's too high to fit in the screen, you won't have to scroll down long to get to the footer */
+}
+
+.modal-header,
+.modal-footer {
+  background-color: rgb(247,247,247);
+}
+
 .page-card img {
   object-fit: contain;
   height: 200px;
