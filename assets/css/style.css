@@ -96,6 +96,15 @@
 
 #heading {
   position: relative;
+  height: 100%;
+}
+
+#heading-area {
+  height: 20%
+}
+
+#heading-area.small {
+  height: fit-content;
 }
 
 #heading .close,

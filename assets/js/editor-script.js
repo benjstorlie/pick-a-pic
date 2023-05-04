@@ -73,6 +73,7 @@ function displayCard(cardData={}) {
               ${emoji("1F4AC")}
             </button>
           </div>
+
           <input type="text" class="form-control" placeholder="add title" id="input-${stamp}" data-stamp="${stamp}">
         </div>
       </form>
@@ -80,7 +81,8 @@ function displayCard(cardData={}) {
       <span aria-hidden="true">&times;</span>
     </button>
     </div>
-    <div id="img-${stamp}" data-stamp="${stamp}" role="button" class="btn img-card img-div" data-toggle="modal" data-target="#modal-${stamp}">
+    <button id="img-${stamp}" data-stamp="${stamp}" role="button" class="btn btn-outline-primary img-card img-div" data-toggle="modal" data-target="#modal-${stamp}">
+
   `)
 
   if (cardData.title) {
@@ -105,7 +107,7 @@ function displayCard(cardData={}) {
   });
 
   if (!cardData.src) {
-    image.css("background-image", "url ('./assets/images/img-sample.png')");
+    image.html("<h4>Click to add an image!</h4>"+emoji("2795","style='font-size:4rem'"));
   } else {
     image.css("background-image","url('"+ cardData.src +"')");
   }
@@ -139,7 +141,7 @@ function displayHeading(cardData) {
           </div>
         </form>
       </div>
-        <div id="img-heading" role="button" class="btn img-heading img-div" data-toggle="modal" data-target="#modal-heading">
+        <button id="img-heading" role="button" class="btn btn-outline-primary img-heading img-div" data-toggle="modal" data-target="#modal-heading">
       <button id="delete-heading" type="button" class="close" aria-label="Delete">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -169,8 +171,7 @@ function displayHeading(cardData) {
 
   // If an image wasn't already chosen, put a sample image there.
   if (!cardData.src) {
-    image.css("background-image", "url ('./assets/images/img-sample.png')");
-
+    image.html("<h4>Click to add an image!</h4>"+emoji("2795","style='font-size:4rem'"));
   } else {
     image.css("background-image","url('"+ cardData.src +"')");
   }
@@ -194,6 +195,7 @@ function headingButton(show=true) {
   const button = $("<button>").text("Add heading or question!").addClass("btn btn-warning btn-lg").click(showHeading).attr("id","heading-btn");
   if (show) {
     button.addClass("d-none");
+    ("#heading-area").addClass("small");
   }
   return button;
 }
@@ -289,7 +291,7 @@ function saveNewImg(event) {
   $("#modal-"+stamp).modal("hide");
 
   // re-set the image in the card
-  $("#img-"+stamp).css("background-image","url('"+ src +"')");
+  $("#img-"+stamp).empty().css("background-image","url('"+ src +"')");
 }
 
 function showSearchResults(event) {
@@ -430,6 +432,7 @@ function hideHeading() {
   setPageData(pageData);
 
   $("#heading-btn").removeClass("d-none");
+  $("#heading-area").addClass("small");
   $("#heading").addClass("d-none");
   $("#heading").removeClass("d-flex");
   
@@ -441,6 +444,7 @@ function showHeading() {
   setPageData(pageData);
 
   $("#heading").addClass("d-flex");
+  $("#heading-area").removeClass("small");
   $("#heading").removeClass("d-none");
   $("#heading-btn").addClass("d-none");
 }
