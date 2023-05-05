@@ -2,7 +2,7 @@
 /* The following is copied from the style.css document from the homepage for the Firefox Emoji site http://mozilla.github.io/fxemoji/dist/FirefoxEmoji/index.html */
 @font-face {
   font-family: "FirefoxEmoji";
-  src: url('http://mozilla.github.io/fxemoji/dist/FirefoxEmoji/FirefoxEmoji.ttf') format('truetype');
+  src: url('https://mozilla.github.io/fxemoji/dist/FirefoxEmoji/FirefoxEmoji.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
